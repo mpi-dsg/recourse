@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:16@sha256:5d143123fdf80462d1778cd4f24b9f7ca13c87174bca19141fb194c5a1ebca59
+    container_name: recourse-integration-postgres
+    environment:
+      POSTGRES_USER: recourse
+      POSTGRES_PASSWORD: recourse
+      POSTGRES_DB: recourse_test
+    ports:
+      - "${RECOURSE_PG_PORT:-55432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U recourse -d recourse_test"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+  localstack:
+    image: localstack/localstack:4.0@sha256:17c2f79ca4e1f804eb912291a19713d4134806325ef0d21d4c1053161dfa72d0
+    container_name: recourse-integration-localstack
+    environment:
+      SERVICES: "ssm,ec2,autoscaling"
+      DEFAULT_REGION: "us-east-1"
+      EAGER_SERVICE_LOADING: "1"
+    ports:
+      - "${RECOURSE_LOCALSTACK_PORT:-54566}:4566"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:4566/_localstack/health | grep -q 'available'"]
+      interval: 2s
+      timeout: 5s
+      retries: 60

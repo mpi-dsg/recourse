@@ -1,0 +1,22 @@
+{
+  "name": "@recourse/runtime",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "packages/compensators/*"
+  ],
+  "scripts": {
+    "test": "bun test",
+    "build": "bun run typecheck",
+    "typecheck": "bun run --filter '*' typecheck && tsc -p tsconfig.provider-scripts.json --noEmit",
+    "typecheck:provider-scripts": "tsc -p tsconfig.provider-scripts.json --noEmit"
+  },
+  "overrides": {
+    "ws": "^8.21.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.0",
+    "typescript": "^5.5.0"
+  }
+}

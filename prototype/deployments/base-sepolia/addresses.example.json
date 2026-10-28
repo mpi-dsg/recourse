@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "network": "base-sepolia",
+  "chainId": 84532,
+  "rpcEndpointLabel": "base-sepolia",
+  "deployedAt": null,
+  "commit": "",
+  "blockNumber": null,
+  "contracts": {
+    "RecourseRegistry": "",
+    "BondVault": "",
+    "ClaimRegistry": "",
+    "OptimisticPath": "",
+    "ArbitrablePath": "",
+    "MockArbitrator": ""
+  },
+  "externalBackends": {
+    "BondAsset_USDC": "",
+    "OptimisticOracleV3_UMA": ""
+  },
+  "notes": "Describe whether the ERC-792 backend is real or mocked, and whether external backends are live contracts.",
+  "sourceStatus": {
+    "classification": "current-source-match-or-obsolete-source-mismatch",
+    "matchesCurrentSource": false,
+    "receiptArtifact": "receipts.json",
+    "knownIncompatibilities": []
+  }
+}

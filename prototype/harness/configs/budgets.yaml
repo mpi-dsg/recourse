@@ -1,0 +1,28 @@
+# Pre-registered deployability budgets.
+# Recorded before final runs so measurements compare against fixed criteria
+# rather than being post-hoc rationalised. Violations must be flagged in
+# section VII.B (Threats) and section IX (Evaluation) of main.tex.
+
+schemaVersion: 1
+seedHash: sha256:budgets-v1
+
+# Per-call added latency budget (ms), measured at the adapter boundary.
+addedLatencyMs:
+  postgres: 250
+  git: 350
+  cloud: 600
+
+# Wall-clock budget for claim finalisation (seconds). Includes liveness window.
+claimFinalisationSec:
+  optimistic: 21900    # 6h liveness + 5min slack
+  arbitrated: 172800   # 48h
+
+# Bond lockup ratio: locked / (covered + uncompensated). 1.0 == perfectly
+# sized; >1 means over-bonded, <1 means under-bonded.
+bondLockupRatio:
+  target: 1.25
+  maximum: 3.0
+
+# Fraction of optimistic settlements that were later found incorrect.
+falseOptimisticRatio:
+  maximum: 0.02

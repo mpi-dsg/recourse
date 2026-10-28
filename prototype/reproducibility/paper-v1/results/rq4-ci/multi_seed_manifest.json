@@ -1,0 +1,100 @@
+{
+  "baseSeeds": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ],
+  "config": {
+    "approval_rate": 0.7,
+    "baselines": [
+      "oap",
+      "atomix",
+      "centralized",
+      "recourse"
+    ],
+    "budget_file_hash": "sha256:45b2e067b39db36a8cd00891f3647099f491af2e16036a40d9edc9b41c5a27d3",
+    "concurrency": 2,
+    "failure_density": 0.5,
+    "fault_classes": [
+      "NONE"
+    ],
+    "num_calls": 30,
+    "repetitions": 5,
+    "rq": "rq4",
+    "schemaVersion": 1,
+    "seed": 13,
+    "workload": "postgres"
+  },
+  "configHash": "sha256:7616511bb1c0605dcb76ffc04f8a919cbbdf7d97be1cee3f91df3ee40561713e",
+  "gitCommit": "67212e27f82e4c4ec3e6528423d493bae3d55166",
+  "gitDirty": true,
+  "perCellRepetitions": 1,
+  "perSeedRepetitions": 1,
+  "realizedSeeds": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ],
+  "rq": "rq4",
+  "samplesPerCell": 10,
+  "schemaVersion": 1,
+  "seedSchedule": [
+    {
+      "baseSeed": 42,
+      "realizedSeed": 42
+    },
+    {
+      "baseSeed": 43,
+      "realizedSeed": 43
+    },
+    {
+      "baseSeed": 44,
+      "realizedSeed": 44
+    },
+    {
+      "baseSeed": 45,
+      "realizedSeed": 45
+    },
+    {
+      "baseSeed": 46,
+      "realizedSeed": 46
+    },
+    {
+      "baseSeed": 47,
+      "realizedSeed": 47
+    },
+    {
+      "baseSeed": 48,
+      "realizedSeed": 48
+    },
+    {
+      "baseSeed": 49,
+      "realizedSeed": 49
+    },
+    {
+      "baseSeed": 50,
+      "realizedSeed": 50
+    },
+    {
+      "baseSeed": 51,
+      "realizedSeed": 51
+    }
+  ],
+  "sourceConfigRepetitions": 5,
+  "statisticalUnit": "independent_trace_seed",
+  "totalArtifacts": 40
+}

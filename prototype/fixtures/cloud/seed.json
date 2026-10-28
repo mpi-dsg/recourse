@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "description": "Cloud workload fixture for the SSM Parameter Store path.",
+  "parameters": [
+    {
+      "name": "/recourse/test/app-config",
+      "value": "{\"replicas\":2,\"memoryMb\":512}",
+      "type": "String"
+    },
+    {
+      "name": "/recourse/test/feature-flags",
+      "value": "ff_a=on,ff_b=off",
+      "type": "String"
+    }
+  ],
+  "seedHash": "sha256:cloud-fixture-v1"
+}

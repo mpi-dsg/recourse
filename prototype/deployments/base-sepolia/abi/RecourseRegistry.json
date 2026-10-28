@@ -1,0 +1,653 @@
+[
+  {
+    "type": "function",
+    "name": "get",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct RecourseTypes.RecourseContract",
+        "components": [
+          {
+            "name": "schemaVersion",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "operator",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "actionTemplate",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.ActionTemplate",
+            "components": [
+              {
+                "name": "tool",
+                "type": "string",
+                "internalType": "string"
+              },
+              {
+                "name": "action",
+                "type": "string",
+                "internalType": "string"
+              }
+            ]
+          },
+          {
+            "name": "resourceScope",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.ResourceScope",
+            "components": [
+              {
+                "name": "scopeType",
+                "type": "string",
+                "internalType": "string"
+              },
+              {
+                "name": "descriptorHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              }
+            ]
+          },
+          {
+            "name": "effectClass",
+            "type": "uint8",
+            "internalType": "enum RecourseTypes.EffectClass"
+          },
+          {
+            "name": "recoveryOperator",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.RecoveryOperator",
+            "components": [
+              {
+                "name": "compensatorId",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "freshnessSeconds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "retentionSeconds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "authPolicyHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              }
+            ]
+          },
+          {
+            "name": "coveredLossClass",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.CoveredLossClass",
+            "components": [
+              {
+                "name": "codesHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "excludeListHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              }
+            ]
+          },
+          {
+            "name": "payoutRule",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.PayoutRule",
+            "components": [
+              {
+                "name": "ruleType",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "paramsHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "maxPayout",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "bond",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.Bond",
+            "components": [
+              {
+                "name": "asset",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "minAmount",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "maxAggregateExposure",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "evidenceSchema",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.EvidenceSchema",
+            "components": [
+              {
+                "name": "schemaId",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "requiredProvenance",
+                "type": "uint8",
+                "internalType": "enum RecourseTypes.Provenance"
+              },
+              {
+                "name": "accessPolicyHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              }
+            ]
+          },
+          {
+            "name": "deadlines",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.Deadlines",
+            "components": [
+              {
+                "name": "recoverySeconds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "submissionSeconds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "livenessSeconds",
+                "type": "uint64",
+                "internalType": "uint64"
+              }
+            ]
+          },
+          {
+            "name": "disputeRoute",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.DisputeRoute",
+            "components": [
+              {
+                "name": "arbitrator",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "evidenceGroupId",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "isAdmissible",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "register",
+    "inputs": [
+      {
+        "name": "k",
+        "type": "tuple",
+        "internalType": "struct RecourseTypes.RecourseContract",
+        "components": [
+          {
+            "name": "schemaVersion",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "operator",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "actionTemplate",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.ActionTemplate",
+            "components": [
+              {
+                "name": "tool",
+                "type": "string",
+                "internalType": "string"
+              },
+              {
+                "name": "action",
+                "type": "string",
+                "internalType": "string"
+              }
+            ]
+          },
+          {
+            "name": "resourceScope",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.ResourceScope",
+            "components": [
+              {
+                "name": "scopeType",
+                "type": "string",
+                "internalType": "string"
+              },
+              {
+                "name": "descriptorHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              }
+            ]
+          },
+          {
+            "name": "effectClass",
+            "type": "uint8",
+            "internalType": "enum RecourseTypes.EffectClass"
+          },
+          {
+            "name": "recoveryOperator",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.RecoveryOperator",
+            "components": [
+              {
+                "name": "compensatorId",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "freshnessSeconds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "retentionSeconds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "authPolicyHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              }
+            ]
+          },
+          {
+            "name": "coveredLossClass",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.CoveredLossClass",
+            "components": [
+              {
+                "name": "codesHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "excludeListHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              }
+            ]
+          },
+          {
+            "name": "payoutRule",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.PayoutRule",
+            "components": [
+              {
+                "name": "ruleType",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "paramsHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "maxPayout",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "bond",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.Bond",
+            "components": [
+              {
+                "name": "asset",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "minAmount",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "maxAggregateExposure",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "evidenceSchema",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.EvidenceSchema",
+            "components": [
+              {
+                "name": "schemaId",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "requiredProvenance",
+                "type": "uint8",
+                "internalType": "enum RecourseTypes.Provenance"
+              },
+              {
+                "name": "accessPolicyHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              }
+            ]
+          },
+          {
+            "name": "deadlines",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.Deadlines",
+            "components": [
+              {
+                "name": "recoverySeconds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "submissionSeconds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "livenessSeconds",
+                "type": "uint64",
+                "internalType": "uint64"
+              }
+            ]
+          },
+          {
+            "name": "disputeRoute",
+            "type": "tuple",
+            "internalType": "struct RecourseTypes.DisputeRoute",
+            "components": [
+              {
+                "name": "arbitrator",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "evidenceGroupId",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "revoke",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "event",
+    "name": "ContractRegistered",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "operator",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "ContractRevoked",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "operator",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "AggregateExposureBelowMaxPayout",
+    "inputs": [
+      {
+        "name": "maxAggregateExposure",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "maxPayout",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "AlreadyRegistered",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "AlreadyRevoked",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidDeadlineOrder",
+    "inputs": [
+      {
+        "name": "recoverySeconds",
+        "type": "uint64",
+        "internalType": "uint64"
+      },
+      {
+        "name": "submissionSeconds",
+        "type": "uint64",
+        "internalType": "uint64"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "MinimumBondBelowMaxPayout",
+    "inputs": [
+      {
+        "name": "minAmount",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "maxPayout",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotCompensable",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NotOperator",
+    "inputs": [
+      {
+        "name": "caller",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "operator",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "UnknownContract",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "UnsupportedSchemaVersion",
+    "inputs": [
+      {
+        "name": "expected",
+        "type": "uint8",
+        "internalType": "uint8"
+      },
+      {
+        "name": "actual",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ZeroArbitrator",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ZeroBond",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ZeroBondAsset",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ZeroDeadlines",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ZeroPayout",
+    "inputs": []
+  }
+]

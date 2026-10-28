@@ -1,0 +1,86 @@
+{
+  "foundry": {
+    "seed": "0xd92a2d2f75c1bf16412ddacb23e74a4d85c3828e4876c127c777a2f34dc5cefe",
+    "stateful": {
+      "calls": 384000,
+      "invariants": 3,
+      "reverts": 0,
+      "runs": 768,
+      "tests": [
+        {
+          "calls": 128000,
+          "name": "invariant_bondCovers",
+          "reverts": 0,
+          "runs": 256
+        },
+        {
+          "calls": 128000,
+          "name": "invariant_claimMonotone",
+          "reverts": 0,
+          "runs": 256
+        },
+        {
+          "calls": 128000,
+          "name": "invariant_payoutCap",
+          "reverts": 0,
+          "runs": 256
+        }
+      ]
+    },
+    "stateless": {
+      "fuzzRuns": 768,
+      "testResults": [
+        {
+          "name": "testFuzz_register_idempotent",
+          "runs": 256
+        },
+        {
+          "name": "testFuzz_submitClaim_neverReverts",
+          "runs": 256
+        },
+        {
+          "name": "testFuzz_submitClaim_revertsAboveCap",
+          "runs": 256
+        }
+      ],
+      "tests": 3
+    }
+  },
+  "hypothesis": {
+    "failingExamples": 0,
+    "invalidExamples": 0,
+    "passingExamples": 800,
+    "properties": 4,
+    "propertyResults": [
+      {
+        "failingExamples": 0,
+        "invalidExamples": 0,
+        "name": "test_receipt_validity_never_crashes",
+        "passingExamples": 200
+      },
+      {
+        "failingExamples": 0,
+        "invalidExamples": 0,
+        "name": "test_classification_is_idempotent",
+        "passingExamples": 200
+      },
+      {
+        "failingExamples": 0,
+        "invalidExamples": 0,
+        "name": "test_monotone_scope_ineligible_persists",
+        "passingExamples": 200
+      },
+      {
+        "failingExamples": 0,
+        "invalidExamples": 0,
+        "name": "test_capped_payout_for_optimistic_route",
+        "passingExamples": 200
+      }
+    ],
+    "seed": 20260509
+  },
+  "notes": {
+    "units": "Hypothesis examples, Foundry stateless fuzz runs, and Foundry stateful invariant calls are reported separately and must not be added into one execution count."
+  },
+  "schemaVersion": 1
+}

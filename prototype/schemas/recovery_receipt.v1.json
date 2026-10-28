@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://recourse.systems/schemas/recovery_receipt.v1.json",
+  "title": "RecoveryReceipt",
+  "description": "EIP-712 typed receipt emitted by the registered compensator after recovery is attempted. Realizes the recovery evidence object r in the settleability model (main.tex:128).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractId",
+    "effectReceiptHash",
+    "compensatorAddress",
+    "restoreArtifactHash",
+    "outcome",
+    "residualMeasurements",
+    "recoveryStartTs",
+    "recoveryEndTs",
+    "signature"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "contractId": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$"
+    },
+    "effectReceiptHash": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$",
+      "description": "EIP-712 digest of the EffectReceipt this recovery responds to."
+    },
+    "compensatorAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$",
+      "description": "Compensator's ECDSA address."
+    },
+    "restoreArtifactHash": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$",
+      "description": "Hash of the restore artifact (snapshot blob, reflog dump, prior-config JSON) stored in the evidence store."
+    },
+    "outcome": {
+      "type": "string",
+      "enum": ["success", "partial", "failure", "inconclusive"],
+      "description": "Result of the compensator invocation. 'inconclusive' is emitted automatically when no schema-valid receipt arrived before Δ_ρ (main.tex:263)."
+    },
+    "residualMeasurements": {
+      "type": "object",
+      "description": "Schema-defined residual measurements, keyed by the κ.coveredLossClass codes. Each entry is the agreed measurement, its evidence source, and the rule by which it maps into P(o,r). Adapter-specific shape; the ClaimRegistry does not parse beyond ensuring required keys exist.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["value", "evidenceSource"],
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Decimal-string value to preserve precision (rows, seconds, USD-cents, bytes)."
+          },
+          "evidenceSource": {
+            "type": "string",
+            "enum": ["provider-receipt", "snapshot-diff", "cost-explorer", "reflog", "compensator-attested"],
+            "description": "Where this measurement was computed. provider-receipt and snapshot-diff are L1; cost-explorer is L1 for AWS; reflog is L2; compensator-attested is L2."
+          },
+          "artifactHash": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{64}$",
+            "description": "Optional pointer into the evidence store."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "recoveryStartTs": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "recoveryEndTs": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{130}$"
+    }
+  }
+}

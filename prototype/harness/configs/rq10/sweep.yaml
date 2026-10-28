@@ -1,0 +1,37 @@
+# RQ10 — Correlated-failure burst sensitivity (reviewer follow-up).
+#
+# Distinct from the existing BOND_STRESS adversary (which models independent
+# cap-saturating claims), this sweep models a *correlated* failure event:
+# with probability p, a fixed-size burst of k admitted actions all fail at
+# once with full gross harm (think bad rollout hitting many tenants at the
+# same time). We hold p=0.3 and the bond multiplier at the 10x reference
+# (cf. RQ8 / main.tex §IX.E), and sweep the burst size k so the
+# bond-utilisation, peak-lock, shortfall, and uncompensated-loss columns
+# all scale with k. NONE adversary, NONE fault — the burst is purely a
+# trace-level mutation, orthogonal to the predicate pipeline.
+
+schemaVersion: 1
+rq: rq10
+workloads:
+  - postgres
+seed: 42
+num_calls: 30
+failure_density: 0.5
+concurrency: 3
+approval_rate: 1.0
+repetitions: 5
+baselines:
+  - recourse
+fault_classes:
+  - NONE
+adversary_classes:
+  - NONE
+bond_multipliers:
+  - 10
+correlation_prob: 0.3
+correlation_burst_sizes:
+  - 1
+  - 2
+  - 4
+  - 8
+  - 16

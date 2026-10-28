@@ -1,0 +1,288 @@
+{
+  "schemaVersion": 1,
+  "paperInventory": {
+    "tables": [
+      "tables/table_rq1_baselines.tex",
+      "tables/table_rq4_ablation.tex",
+      "tables/table_rq5_routing.tex",
+      "tables/table_anvile2e_gas.tex",
+      "tables/table_k_catalogue.tex",
+      "tables/table_rq5_adv.tex",
+      "tables/table_provider_postgres.tex",
+      "tables/table_provider_git.tex",
+      "tables/table_provider_cloud.tex",
+      "tables/table_rq8_bondsens.tex",
+      "tables/table_rq10_correlated.tex"
+    ],
+    "figures": [
+      "figures/figure_architecture.png"
+    ]
+  },
+  "claims": [
+    {
+      "id": "table-rq1-baselines",
+      "kind": "table",
+      "status": "reproducible",
+      "sources": [
+        "repo:harness/configs/rq1/sweep.yaml",
+        "repo:harness/src/recourse_harness/baselines.py",
+        "repo:scripts/run-rq.sh"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> scripts/run-rq.sh rq1 && RECOURSE_RESULTS_ROOT=<fresh> scripts/build-artifacts.sh",
+      "result": "repo:reproducibility/paper-v1/results/rq1/table_rq1_baselines.tex",
+      "paperDestination": "tables/table_rq1_baselines.tex",
+      "statisticalUnit": "five deterministic derived trace seeds, 42 through 46, per configured cell",
+      "verificationMode": "byte_equal"
+    },
+    {
+      "id": "table-rq4-ablation",
+      "kind": "table",
+      "status": "reproducible",
+      "sources": [
+        "repo:harness/configs/rq4/sweep.yaml",
+        "repo:harness/src/recourse_harness/baselines.py",
+        "repo:scripts/run-rq.sh"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> scripts/run-rq.sh rq4 && RECOURSE_RESULTS_ROOT=<fresh> scripts/build-artifacts.sh",
+      "result": "repo:reproducibility/paper-v1/results/rq4/table_rq4_ablation.tex",
+      "paperDestination": "tables/table_rq4_ablation.tex",
+      "statisticalUnit": "five deterministic derived trace seeds, 42 through 46, per configured cell",
+      "verificationMode": "byte_equal"
+    },
+    {
+      "id": "table-rq5-routing",
+      "kind": "table",
+      "status": "reproducible",
+      "sources": [
+        "repo:harness/configs/rq5/sweep.yaml",
+        "repo:harness/src/recourse_harness/tables/rq5.py",
+        "repo:scripts/run-rq.sh"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> scripts/run-rq.sh rq5 && RECOURSE_RESULTS_ROOT=<fresh> scripts/build-artifacts.sh",
+      "result": "repo:reproducibility/paper-v1/results/rq5/table_rq5_routing.tex",
+      "paperDestination": "tables/table_rq5_routing.tex",
+      "statisticalUnit": "five deterministic derived trace seeds per routing-predicate cell",
+      "verificationMode": "byte_equal"
+    },
+    {
+      "id": "table-anvil-e2e-gas",
+      "kind": "table",
+      "status": "reproducible",
+      "sources": [
+        "repo:contracts/test/E2E.t.sol",
+        "repo:scripts/local_test_results.py",
+        "repo:scripts/local_test_results_lib.py"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> make local-test-results",
+      "result": "repo:reproducibility/paper-v1/results/anvil-e2e/table_anvile2e_gas.tex",
+      "paperDestination": "tables/table_anvile2e_gas.tex",
+      "statisticalUnit": "median Foundry in-process call gas for one isolated happy-path test and one isolated disputed-path test",
+      "verificationMode": "byte_equal"
+    },
+    {
+      "id": "table-kappa-catalogue",
+      "kind": "table",
+      "status": "reproducible",
+      "sources": [
+        "repo:fixtures/k-contracts",
+        "repo:contracts/script/RegisterFixtures.s.sol",
+        "repo:scripts/run-k-contracts.sh"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> scripts/run-k-contracts.sh",
+      "result": "repo:reproducibility/paper-v1/results/k-contracts/table_k_catalogue.tex",
+      "paperDestination": "tables/table_k_catalogue.tex",
+      "statisticalUnit": "five deterministic contract-registration calls on a fresh local Anvil chain",
+      "verificationMode": "byte_equal"
+    },
+    {
+      "id": "table-rq5-adversaries",
+      "kind": "table",
+      "status": "reproducible",
+      "sources": [
+        "repo:harness/configs/rq5-adv/sweep.yaml",
+        "repo:harness/src/recourse_harness/adversaries.py",
+        "repo:scripts/run-rq.sh"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> scripts/run-rq.sh rq5-adv && RECOURSE_RESULTS_ROOT=<fresh> scripts/build-artifacts.sh",
+      "result": "repo:reproducibility/paper-v1/results/rq5-adv/table_rq5_adv.tex",
+      "paperDestination": "tables/table_rq5_adv.tex",
+      "statisticalUnit": "five deterministic derived trace seeds per adversary cell",
+      "verificationMode": "byte_equal"
+    },
+    {
+      "id": "table-provider-postgres",
+      "kind": "table",
+      "status": "reproducible",
+      "sources": [
+        "repo:runtime-ts/packages/adapter-postgres/bench/provider-postgres.ts",
+        "repo:scripts/provider-postgres-emit.py",
+        "repo:scripts/run-provider-benchmarks.sh"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> scripts/run-provider-benchmarks.sh",
+      "result": "repo:reproducibility/paper-v1/results/rq-provider-postgres/table_provider_postgres.tex",
+      "paperDestination": "tables/table_provider_postgres.tex",
+      "statisticalUnit": "20 local Docker Postgres sandbox cells",
+      "verificationMode": "byte_equal"
+    },
+    {
+      "id": "table-provider-git",
+      "kind": "table",
+      "status": "reproducible",
+      "sources": [
+        "repo:scripts/provider-bench-git.ts",
+        "repo:scripts/provider-bench-git-to-parquet.py",
+        "repo:scripts/run-provider-benchmarks.sh"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> scripts/run-provider-benchmarks.sh",
+      "result": "repo:reproducibility/paper-v1/results/rq-provider-git/table_provider_git.tex",
+      "paperDestination": "tables/table_provider_git.tex",
+      "statisticalUnit": "20 local bare-Git-repository sandbox cells",
+      "verificationMode": "byte_equal"
+    },
+    {
+      "id": "table-provider-cloud",
+      "kind": "table",
+      "status": "reproducible",
+      "sources": [
+        "repo:scripts/provider-bench-cloud.ts",
+        "repo:scripts/provider-bench-cloud-to-parquet.py",
+        "repo:scripts/run-provider-benchmarks.sh"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> scripts/run-provider-benchmarks.sh",
+      "result": "repo:reproducibility/paper-v1/results/rq-provider-cloud/table_provider_cloud.tex",
+      "paperDestination": "tables/table_provider_cloud.tex",
+      "statisticalUnit": "20 LocalStack SSM sandbox cells",
+      "verificationMode": "byte_equal"
+    },
+    {
+      "id": "table-rq8-bond-sensitivity",
+      "kind": "table",
+      "status": "reproducible",
+      "sources": [
+        "repo:harness/configs/rq8/sweep.yaml",
+        "repo:harness/src/recourse_harness/tables/rq8.py",
+        "repo:scripts/run-rq.sh"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> scripts/run-rq.sh rq8 && RECOURSE_RESULTS_ROOT=<fresh> scripts/build-artifacts.sh",
+      "result": "repo:reproducibility/paper-v1/results/rq8/table_rq8_bondsens.tex",
+      "paperDestination": "tables/table_rq8_bondsens.tex",
+      "statisticalUnit": "five deterministic derived trace seeds per bond-multiplier cell",
+      "verificationMode": "byte_equal"
+    },
+    {
+      "id": "table-rq10-correlated",
+      "kind": "table",
+      "status": "reproducible",
+      "sources": [
+        "repo:harness/configs/rq10/sweep.yaml",
+        "repo:harness/src/recourse_harness/tables/rq10.py",
+        "repo:scripts/run-rq.sh"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> scripts/run-rq.sh rq10 && RECOURSE_RESULTS_ROOT=<fresh> scripts/build-artifacts.sh",
+      "result": "repo:reproducibility/paper-v1/results/rq10/table_rq10_correlated.tex",
+      "paperDestination": "tables/table_rq10_correlated.tex",
+      "statisticalUnit": "five deterministic derived trace seeds per correlated-failure cell",
+      "verificationMode": "byte_equal"
+    },
+    {
+      "id": "figure-architecture",
+      "kind": "figure",
+      "status": "reproducible",
+      "sources": [
+        "project:docs/recourse-architecture.html",
+        "repo:scripts/render-architecture-figure.sh"
+      ],
+      "command": "scripts/render-architecture-figure.sh <fresh>/figure_architecture.png",
+      "result": "repo:reproducibility/paper-v1/figures/figure_architecture.png",
+      "paperDestination": "figures/figure_architecture.png",
+      "statisticalUnit": "not applicable; deterministic 3520 by 2080 pixel render",
+      "verificationMode": "byte_equal"
+    },
+    {
+      "id": "headline-independent-seed-ci",
+      "kind": "headline",
+      "status": "reproducible",
+      "claimText": "The RQ4 Atomix-to-Recourse reduction is 49.8 percent plus or minus 12.6 percentage points and 3128 plus or minus 791 units.",
+      "sources": [
+        "repo:harness/src/recourse_harness/multi_seed.py",
+        "repo:harness/src/recourse_harness/tables/ci.py",
+        "repo:scripts/run-rq-ci.sh",
+        "paper:main.tex"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> scripts/run-rq-ci.sh",
+      "result": "repo:reproducibility/paper-v1/results/multi-seed/report.md",
+      "paperDestination": "main.tex#headline-independent-seed-ci",
+      "statisticalUnit": "10 independent base trace seeds, 42 through 51, with one sample per seed and cell",
+      "verificationMode": "source_only"
+    },
+    {
+      "id": "headline-gas",
+      "kind": "headline",
+      "status": "reproducible",
+      "claimText": "Foundry reports 1854097 happy-path and 2059851 disputed-path in-process call-gas units.",
+      "sources": [
+        "repo:contracts/test/E2E.t.sol",
+        "repo:scripts/local_test_results.py",
+        "paper:main.tex"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> make local-test-results",
+      "result": "repo:reproducibility/paper-v1/results/anvil-e2e/metrics.json",
+      "paperDestination": "main.tex#headline-gas",
+      "statisticalUnit": "one isolated Foundry gas-report execution per path",
+      "verificationMode": "source_only"
+    },
+    {
+      "id": "headline-property-evidence",
+      "kind": "headline",
+      "status": "reproducible",
+      "claimText": "Four Hypothesis properties pass 800 examples, three Foundry stateless fuzz tests pass 768 runs, and three invariants pass 384000 calls with zero reverts.",
+      "sources": [
+        "repo:harness/tests/test_classifier_properties.py",
+        "repo:contracts/test/Recourse.fuzz.t.sol",
+        "repo:contracts/test/Recourse.invariant.t.sol",
+        "repo:scripts/local_test_results.py",
+        "paper:main.tex"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> make local-test-results",
+      "result": "repo:reproducibility/paper-v1/results/fuzzing/metrics.json",
+      "paperDestination": "main.tex#headline-property-evidence",
+      "statisticalUnit": "Hypothesis examples, Foundry stateless fuzz runs, and Foundry invariant calls reported separately",
+      "verificationMode": "source_only"
+    },
+    {
+      "id": "provider-evidence-boundary",
+      "kind": "limitation",
+      "status": "reproducible",
+      "claimText": "The provider-compatible observations are local L2 sandbox evidence, not managed-provider, L1, or L0 evidence.",
+      "sources": [
+        "repo:scripts/run-provider-benchmarks.sh",
+        "repo:reproducibility/paper-v1/results/rq-provider-postgres/manifest.json",
+        "repo:reproducibility/paper-v1/results/rq-provider-git/manifest.json",
+        "repo:reproducibility/paper-v1/results/rq-provider-cloud/manifest.json",
+        "paper:main.tex"
+      ],
+      "command": "RECOURSE_RESULTS_ROOT=<fresh> scripts/run-provider-benchmarks.sh",
+      "result": "repo:reproducibility/paper-v1/results/rq-provider-postgres/manifest.json",
+      "paperDestination": "main.tex#provider-evidence-boundary",
+      "statisticalUnit": "20 local sandbox cells for each of three provider-compatible workloads",
+      "verificationMode": "source_only"
+    },
+    {
+      "id": "historical-base-sepolia-boundary",
+      "kind": "limitation",
+      "status": "reproducible",
+      "claimText": "Eight obsolete Base Sepolia receipts total 7487956 execution-gas units and 305255 L1-gas units; all six deployed bytecodes mismatch current source.",
+      "sources": [
+        "repo:deployments/base-sepolia/addresses.json",
+        "repo:deployments/base-sepolia/receipts.json",
+        "repo:scripts/verify_base_sepolia.py",
+        "paper:main.tex"
+      ],
+      "command": "python3 scripts/verify_base_sepolia.py",
+      "result": "repo:deployments/base-sepolia/receipts.json",
+      "paperDestination": "main.tex#historical-base-sepolia-boundary",
+      "statisticalUnit": "one historical deployment receipt set and six deployed bytecode comparisons",
+      "verificationMode": "source_only"
+    }
+  ]
+}

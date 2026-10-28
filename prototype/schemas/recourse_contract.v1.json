@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://recourse.systems/schemas/recourse_contract.v1.json",
+  "title": "RecourseContract",
+  "description": "Machine-readable ex ante autonomy envelope κ = (a, x, ρ, L, P, B, S, Δ). The runtime checks recourse-eligibility against this object before admitting a compensable tool call; the ClaimRegistry resolves residual claims using the same fields.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractId",
+    "operator",
+    "actionTemplate",
+    "resourceScope",
+    "effectClass",
+    "recoveryOperator",
+    "coveredLossClass",
+    "payoutRule",
+    "bond",
+    "evidenceSchema",
+    "deadlines",
+    "disputeRoute"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "description": "RecourseContract schema version. Bumping is breaking and resets EIP-712 parity tests."
+    },
+    "contractId": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$",
+      "description": "EIP-712 struct hash of this κ, used as the on-chain identifier."
+    },
+    "operator": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$",
+      "description": "Address of the registering operator. Only this address can revoke."
+    },
+    "actionTemplate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool", "action"],
+      "properties": {
+        "tool": {
+          "type": "string",
+          "enum": ["postgres", "git", "cloud"],
+          "description": "Workload adapter that will execute this template."
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Adapter-specific action name (e.g. 'bulkDelete', 'forcePush', 'updateAsg')."
+        }
+      }
+    },
+    "resourceScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "descriptor"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["postgres-table", "git-ref", "cloud-resource"]
+        },
+        "descriptor": {
+          "type": "object",
+          "description": "Adapter-specific identifier for the scope. Postgres: {database, schema, table, tenantId}. Git: {repoUrl, ref, branchPattern}. Cloud: {accountId, region, resourceArn}.",
+          "minProperties": 1
+        }
+      }
+    },
+    "effectClass": {
+      "type": "string",
+      "const": "compensable",
+      "description": "Only 'compensable' actions register a recourse contract. Reversible and excluded actions never reach this stage."
+    },
+    "recoveryOperator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "compensatorId",
+        "freshnessSeconds",
+        "retentionSeconds",
+        "authPolicyHash"
+      ],
+      "properties": {
+        "compensatorId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable identifier of the registered compensator module."
+        },
+        "freshnessSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Max acceptable age of the snapshot/backup the compensator relies on."
+        },
+        "retentionSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "How long the compensator must retain recovery artifacts after execution."
+        },
+        "authPolicyHash": {
+          "type": "string",
+          "pattern": "^0x[0-9a-fA-F]{64}$",
+          "description": "Hash of the off-chain authorization policy the compensator runs under."
+        }
+      }
+    },
+    "coveredLossClass": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["codes", "excludeList"],
+      "properties": {
+        "codes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "rows_deleted",
+              "rows_modified",
+              "downtime_seconds",
+              "manual_recovery_effort",
+              "excess_spend_usd",
+              "history_bytes_lost"
+            ]
+          },
+          "description": "Loss codes the contract is willing to cover."
+        },
+        "excludeList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "data_exfiltration",
+              "public_disclosure",
+              "irreversible_transfer",
+              "physical_action",
+              "reputation_damage",
+              "uncapped_downstream"
+            ]
+          },
+          "description": "Explicit excluded harm classes. main.tex:108 requires this to remain a no-op for non-Recourse harms; listing them defensively documents that scope and forces eligibility to fail if a covered code overlaps an excluded one."
+        }
+      }
+    },
+    "payoutRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "params", "maxPayout"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "rowCountSchedule",
+            "downtimeSchedule",
+            "excessSpendSchedule",
+            "composite"
+          ],
+          "description": "Family of payout function P(o,r). 'composite' linearly combines the first three."
+        },
+        "params": {
+          "type": "object",
+          "description": "Family-specific parameters. rowCountSchedule: {perRowUsd, minPayoutUsd}. downtimeSchedule: {perSecondUsd, thresholdSeconds}. excessSpendSchedule: {coverageRatio, deductibleUsd}. composite: {components: [{type, params, weight}]}."
+        },
+        "maxPayout": {
+          "type": "string",
+          "pattern": "^[0-9]+$",
+          "description": "Hard cap in token base units (e.g. USDC has 6 decimals). Stored as a decimal string to preserve uint256 precision across JSON."
+        }
+      }
+    },
+    "bond": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["asset", "minAmount", "maxAggregateExposure"],
+      "properties": {
+        "asset": {
+          "type": "string",
+          "pattern": "^0x[0-9a-fA-F]{40}$",
+          "description": "ERC-20 collateral token address (USDC on the target chain)."
+        },
+        "minAmount": {
+          "type": "string",
+          "pattern": "^[0-9]+$",
+          "description": "Minimum bonded amount in token base units."
+        },
+        "maxAggregateExposure": {
+          "type": "string",
+          "pattern": "^[0-9]+$",
+          "description": "Cap on E_open + P_max admitted under this contract (main.tex:225)."
+        }
+      }
+    },
+    "evidenceSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaId",
+        "requiredProvenance",
+        "accessPolicyHash"
+      ],
+      "properties": {
+        "schemaId": {
+          "type": "string",
+          "pattern": "^0x[0-9a-fA-F]{64}$",
+          "description": "Hash identifying the evidence-schema definition used by adapter and compensator."
+        },
+        "requiredProvenance": {
+          "type": "string",
+          "enum": ["L0", "L1", "L2"],
+          "description": "Minimum provenance level for objective settlement (main.tex:246). L3 cannot satisfy EvidenceOK."
+        },
+        "accessPolicyHash": {
+          "type": "string",
+          "pattern": "^0x[0-9a-fA-F]{64}$",
+          "description": "Hash of the off-chain policy describing who can read large evidence artifacts during liveness."
+        }
+      }
+    },
+    "deadlines": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recoverySeconds",
+        "submissionSeconds",
+        "livenessSeconds"
+      ],
+      "properties": {
+        "recoverySeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Δ_ρ: max time after the failed action by which a schema-valid RecoveryReceipt must exist (main.tex:263)."
+        },
+        "submissionSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Latest time after the action at which a claimant may open a claim."
+        },
+        "livenessSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Optimistic-path challenge window length."
+        }
+      }
+    },
+    "disputeRoute": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["arbitrator", "evidenceGroupId"],
+      "properties": {
+        "arbitrator": {
+          "type": "string",
+          "pattern": "^0x[0-9a-fA-F]{40}$",
+          "description": "ERC-792 arbitrator contract address (Kleros L2 or MockArbitrator on testnet)."
+        },
+        "evidenceGroupId": {
+          "type": "string",
+          "pattern": "^[0-9]+$",
+          "description": "ERC-1497 evidence group identifier this κ uses."
+        }
+      }
+    }
+  }
+}

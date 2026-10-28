@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recourse architecture and evidence boundary</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #5b6578;
+      --line: #aeb8c8;
+      --paper: #ffffff;
+      --runtime: #e8f1ff;
+      --runtime-strong: #2878d0;
+      --process: #fff1df;
+      --process-strong: #c56b10;
+      --chain: #eee9ff;
+      --chain-strong: #7251bd;
+      --success: #e6f6ed;
+      --success-strong: #268453;
+      --warning: #fff4cf;
+      --warning-strong: #916812;
+      --danger: #ffe8e6;
+      --danger-strong: #b43b32;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #f3f5f8; color: var(--ink); }
+    body {
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    main { max-width: 1240px; margin: 0 auto; padding: 36px 24px 72px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: 40px; line-height: 1.05; margin-bottom: 12px; }
+    h2 { font-size: 24px; margin-bottom: 18px; }
+    h3 { font-size: 16px; margin-bottom: 8px; }
+    .lede { max-width: 850px; color: var(--muted); font-size: 18px; }
+    .section {
+      background: var(--paper);
+      border: 1px solid #dce1e9;
+      border-radius: 16px;
+      margin-top: 24px;
+      padding: 28px;
+      box-shadow: 0 8px 30px rgb(23 32 51 / 6%);
+    }
+    .grid { display: grid; gap: 16px; }
+    .grid.three { grid-template-columns: repeat(3, 1fr); }
+    .grid.two { grid-template-columns: repeat(2, 1fr); }
+    .card {
+      border: 1px solid #d8dee8;
+      border-radius: 12px;
+      padding: 16px;
+      background: #fbfcfe;
+    }
+    .card p, .card li { color: var(--muted); font-size: 14px; }
+    .card ul { padding-left: 18px; margin-bottom: 0; }
+    code {
+      border-radius: 5px;
+      background: #eef1f5;
+      padding: 1px 5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    #paper-figure {
+      width: 1760px;
+      height: 1040px;
+      background: var(--paper);
+      padding: 40px 48px;
+      color: var(--ink);
+      overflow: hidden;
+    }
+    .figure-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 15px;
+      margin-bottom: 28px;
+    }
+    .figure-title h2 { font-size: 34px; margin: 0; }
+    .figure-title span { color: var(--muted); font-size: 20px; }
+    .figure-panel {
+      border: 1.5px solid var(--line);
+      border-radius: 16px;
+      padding: 22px 24px;
+      margin-bottom: 22px;
+    }
+    .panel-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 25px;
+      font-weight: 750;
+      margin-bottom: 18px;
+    }
+    .panel-label {
+      display: inline-grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: white;
+      font-size: 20px;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 1fr 28px 1fr 28px 1fr;
+      align-items: stretch;
+      gap: 8px;
+    }
+    .node {
+      min-height: 116px;
+      border: 2px solid;
+      border-radius: 13px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+    .node strong { font-size: 18px; line-height: 1.15; }
+    .node small { display: block; color: var(--muted); font-size: 13px; margin-top: 7px; }
+    .node.runtime { background: var(--runtime); border-color: var(--runtime-strong); }
+    .node.process { background: var(--process); border-color: var(--process-strong); }
+    .node.chain { background: var(--chain); border-color: var(--chain-strong); }
+    .node.success { background: var(--success); border-color: var(--success-strong); }
+    .arrow {
+      display: grid;
+      place-items: center;
+      color: #667085;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    .receipt-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1.3fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .note {
+      border-left: 6px solid;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 15px;
+    }
+    .note strong { display: block; font-size: 16px; margin-bottom: 3px; }
+    .note.success { background: var(--success); border-color: var(--success-strong); }
+    .note.warning { background: var(--warning); border-color: var(--warning-strong); }
+    .note.danger { background: var(--danger); border-color: var(--danger-strong); }
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    .evidence-card {
+      min-height: 190px;
+      border: 2px solid;
+      border-radius: 13px;
+      padding: 17px;
+    }
+    .evidence-card h3 { font-size: 20px; }
+    .evidence-card p { color: var(--muted); font-size: 15px; margin-bottom: 8px; }
+    .evidence-card.local { background: var(--runtime); border-color: var(--runtime-strong); }
+    .evidence-card.chain { background: var(--chain); border-color: var(--chain-strong); }
+    .evidence-card.limit { background: var(--danger); border-color: var(--danger-strong); }
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      background: rgb(255 255 255 / 75%);
+      border: 1px solid currentColor;
+      padding: 3px 9px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .legend {
+      display: flex;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 13px;
+    }
+    .legend i {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      margin-right: 5px;
+      vertical-align: -2px;
+    }
+    body.paper-mode { background: white; }
+    body.paper-mode main { margin: 0; padding: 0; max-width: none; }
+    body.paper-mode main > :not(#paper-figure) { display: none; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Recourse architecture</h1>
+    <p class="lede">
+      An implementation-grounded view of the prototype, its evaluation boundary,
+      and the evidence that can be reproduced from this repository.
+    </p>
+  </header>
+
+  <section id="paper-figure">
+    <div class="figure-title">
+      <h2>Recourse prototype architecture and evaluation boundary</h2>
+      <span>implemented components, not aspirational protocol</span>
+    </div>
+
+    <div class="figure-panel">
+      <div class="panel-heading">
+        <span class="panel-label">a</span>
+        Runtime and contract flow
+      </div>
+      <div class="flow">
+        <div class="node runtime">
+          <strong>Agent runtime</strong>
+          <small>proposes a risky tool call</small>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node runtime">
+          <strong>Admission classifier</strong>
+          <small>κ + runtime context; fail closed</small>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node process">
+          <strong>Adapter + tool</strong>
+          <small>executes; signs an EffectReceipt</small>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node process">
+          <strong>Compensator</strong>
+          <small>attempts recovery; signs a RecoveryReceipt</small>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node runtime">
+          <strong>Settlement classifier</strong>
+          <small>requires explicit verified receipt facts</small>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node chain">
+          <strong>Claim contracts</strong>
+          <small>operator hash commit, claimant signature, capped payout</small>
+        </div>
+      </div>
+      <div class="receipt-row">
+        <div class="note success">
+          <strong>Verification primitives</strong>
+          The receipt library verifies EIP-712 signer recovery and digests; the
+          classifier requires explicit scope, provenance, and collateral facts.
+        </div>
+        <div class="note warning">
+          <strong>On-chain boundary</strong>
+          Current contracts bind claims to operator-committed hashes and validate
+          the claimant signature/cap. They do not verify receipts or recompute κ.
+        </div>
+        <div class="note danger">
+          <strong>Integration limitation</strong>
+          Provider bench/replay tools do not yet feed an authenticated evidence
+          bundle through this full path; receipt commitment is operator-dependent.
+        </div>
+      </div>
+    </div>
+
+    <div class="figure-panel">
+      <div class="panel-heading">
+        <span class="panel-label">b</span>
+        What the evaluation actually exercises
+      </div>
+      <div class="evidence-grid">
+        <div class="evidence-card local">
+          <span class="badge">LOCAL SANDBOX</span>
+          <h3>Provider-compatible adapters</h3>
+          <p>Docker Postgres 16, a temporary local bare Git repository, and LocalStack SSM.</p>
+          <p>These runs measure deterministic local adapter/compensator behavior—not managed-provider attestations.</p>
+        </div>
+        <div class="evidence-card chain">
+          <span class="badge">LOCAL CHAIN</span>
+          <h3>Contract end-to-end</h3>
+          <p>Foundry and Anvil exercise registration, bond reservation, claims, optimistic callbacks, disputes, and payouts with mocks.</p>
+          <p>Gas and invariant results are generated from this local boundary.</p>
+        </div>
+        <div class="evidence-card limit">
+          <span class="badge">HISTORICAL TESTNET</span>
+          <h3>Base Sepolia deployment</h3>
+          <p>The pinned deployment is read-only provenance evidence and uses a mock arbitrator.</p>
+          <p>Its older UMA wrapper is not a validated live-settlement result and must not support performance or liveness claims.</p>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--runtime-strong)"></i>runtime/local evidence</span>
+        <span><i style="background:var(--process-strong)"></i>side-effect and recovery path</span>
+        <span><i style="background:var(--chain-strong)"></i>contract path</span>
+        <span><i style="background:var(--danger-strong)"></i>unsupported claim boundary</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Business context</h2>
+    <div class="grid three">
+      <div class="card">
+        <h3>Objective</h3>
+        <p>Measure bounded residual harm after risky autonomous actions and test whether a bonded claim path can compensate it.</p>
+      </div>
+      <div class="card">
+        <h3>Actors</h3>
+        <p>Operator, agent runtime, claimant, challenger, adapter/compensator signers, and settlement contracts.</p>
+      </div>
+      <div class="card">
+        <h3>Primary metrics</h3>
+        <p>Gross harm, recovered harm, bonded coverage, uncompensated loss, routing correctness, latency, gas, and collateral shortfall.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Processing pipeline</h2>
+    <div class="grid three">
+      <div class="card"><h3>1. Admission</h3><p>Evaluate κ and explicit, independently verified observations. Missing facts fail closed.</p></div>
+      <div class="card"><h3>2. Side effect</h3><p>Validate commit-path configuration, execute the tool call, then issue a typed receipt.</p></div>
+      <div class="card"><h3>3. Recovery</h3><p>Attempt compensation and issue a recovery receipt bound to the effect digest.</p></div>
+      <div class="card"><h3>4. Classification</h3><p>Route objective L0 facts optimistically; route L1/L2 or disputed facts to arbitration.</p></div>
+      <div class="card"><h3>5. Claim</h3><p>Commit receipt/evidence hashes, submit a claimant-signed capped amount, and reserve exposure.</p></div>
+      <div class="card"><h3>6. Finalization</h3><p>Resolve the local mock optimistic/arbitrated path and release or slash reserved collateral.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>System architecture</h2>
+    <div class="grid two">
+      <div class="card">
+        <h3>Runtime layer</h3>
+        <ul>
+          <li>TypeScript receipts, adapters, compensators, and evidence store</li>
+          <li>Python eligibility, settleability, routing, and evaluation harness</li>
+          <li>JSON schemas plus cross-language hashing fixtures</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Contract layer</h3>
+        <ul>
+          <li>RecourseRegistry and BondVault</li>
+          <li>ClaimRegistry lifecycle and exposure reservation</li>
+          <li>OptimisticPath plus ArbitrablePath</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Features and non-goals</h2>
+    <div class="grid two">
+      <div class="card">
+        <h3>Implemented and tested</h3>
+        <p>Canonical hashing, typed local signatures, fail-closed classifier inputs, deterministic synthetic sweeps, local provider-compatible integrations, and local-chain settlement tests.</p>
+      </div>
+      <div class="card">
+        <h3>Not established by this artifact</h3>
+        <p>Managed-provider attestations, public-state receipt replay, operator-independent receipt commitment, on-chain payout formula evaluation, or production-ready live UMA/Kleros settlement.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Deployment and reproduction</h2>
+    <div class="grid three">
+      <div class="card"><h3>Toolchain</h3><p>Foundry 1.3.5, Bun 1.3.5, uv 0.11.28, Python 3.12, and digest-pinned integration images.</p></div>
+      <div class="card"><h3>Local services</h3><p>Docker Compose starts Postgres and LocalStack. Git uses a temporary bare repository.</p></div>
+      <div class="card"><h3>Outputs</h3><p>Fresh result roots carry configs, realized seeds, dirty state, tool versions, checksums, tables, figures, and claim-validation status.</p></div>
+    </div>
+  </section>
+</main>
+<script>
+  if (new URLSearchParams(window.location.search).get("paper") === "1") {
+    document.body.classList.add("paper-mode");
+  }
+</script>
+</body>
+</html>

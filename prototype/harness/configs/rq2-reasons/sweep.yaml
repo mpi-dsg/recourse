@@ -1,0 +1,47 @@
+# RQ2-reasons — Rejection-reason breakdown of the settleability admission step.
+#
+# RQ2 reports an aggregate eligibility rate of 1.00 for the recourse baseline
+# on a clean trace; this extension sweeps a mix of fault classes (and one
+# under-bonded cell) so the per-sub-predicate rejection share is visible
+# rather than hidden behind a single aggregate. The emitter
+# (``recourse_harness.tables.rq2_reasons``) parses the per-cell
+# ``rejection_reasons`` column and reports the share of calls that failed
+# at each named sub-predicate (WithinScope, RecoveryAvailable, …) plus the
+# admitted rate.
+
+schemaVersion: 1
+rq: rq2-reasons
+workloads:
+  - postgres
+seed: 137
+num_calls: 50
+failure_density: 0.5
+concurrency: 2
+approval_rate: 1.0
+repetitions: 5
+baselines:
+  - recourse
+# Mixed fault classes — each cell injects one fault but the aggregated
+# metrics frame surfaces the union of reasons across cells.
+#   NONE                  -> all admitted (eligibility baseline).
+#   OBS_HIDE_PRESTATE     -> EvidenceSchemaOK rejections.
+#   OBS_AMBIGUOUS_RESOURCE -> EvidenceSchemaOK rejections (provenance L3).
+#   REC_STALE_SNAPSHOT    -> RecoveryAvailable rejections.
+#   REC_PARTIAL_FAILURE   -> RecoveryAvailable rejections.
+#   BND_OUT_OF_CAP_LOSS   -> LossClassBounded rejections (over the cap).
+#   BND_DOWNSTREAM_LEAK   -> LossClassBounded rejections (excluded harm).
+fault_classes:
+  - NONE
+  - OBS_HIDE_PRESTATE
+  - OBS_AMBIGUOUS_RESOURCE
+  - REC_STALE_SNAPSHOT
+  - REC_PARTIAL_FAILURE
+  - BND_OUT_OF_CAP_LOSS
+  - BND_DOWNSTREAM_LEAK
+# Under-bond cell co-sweeps a tiny bond multiplier so the BondSufficient
+# sub-predicate fires on the eligibility side. 1.0 is the default; 0.0
+# collapses ``maxAggregateExposure`` to 1 unit, which is strictly less than
+# ``maxPayout`` for any non-trivial residual.
+bond_multipliers:
+  - 0.0
+  - 1.0

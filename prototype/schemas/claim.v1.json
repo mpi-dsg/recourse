@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://recourse.systems/schemas/claim.v1.json",
+  "title": "Claim",
+  "description": "EIP-712 typed claim submitted to the ClaimRegistry. The router (see RQ5) decides whether this claim takes the optimistic path or routes directly to arbitration based on the attached effect+recovery receipts and the κ.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractId",
+    "jobId",
+    "claimant",
+    "amount",
+    "evidenceCid",
+    "effectReceiptHash",
+    "recoveryReceiptHash",
+    "routeHint",
+    "signature"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "contractId": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+    "jobId": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+    "claimant": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$",
+      "description": "Address claiming residual loss (typically the customer, possibly the operator if they self-attest)."
+    },
+    "amount": {
+      "type": "string",
+      "pattern": "^[0-9]+$",
+      "description": "Asserted residual loss in token base units. Must be <= κ.payoutRule.maxPayout."
+    },
+    "evidenceCid": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]+$",
+      "description": "Content identifier (sha256 hex or IPFS CIDv1) pointing at the canonical evidence bundle in the evidence store."
+    },
+    "effectReceiptHash": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$"
+    },
+    "recoveryReceiptHash": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$"
+    },
+    "routeHint": {
+      "type": "string",
+      "enum": ["optimistic", "arbitrated"],
+      "description": "Claimant's preferred route. The router treats this as a hint only — failing settleability predicates force arbitration regardless."
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{130}$"
+    }
+  }
+}

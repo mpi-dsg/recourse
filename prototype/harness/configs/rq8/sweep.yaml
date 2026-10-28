@@ -1,0 +1,29 @@
+# RQ8 — Bond multiplier sensitivity (reviewer follow-up).
+# Holds workload, baseline, and adversary fixed; sweeps the per-contract bond
+# multiplier across {0.5, 1, 2, 5, 10, 20} so we can show how locked capital,
+# bond utilisation, and uncompensated loss respond. The 10x cap is the spec
+# example referenced in main.tex §IX.E.
+
+schemaVersion: 1
+rq: rq8
+workloads:
+  - postgres
+seed: 42
+num_calls: 30
+failure_density: 0.5
+concurrency: 3
+approval_rate: 1.0
+repetitions: 5
+baselines:
+  - recourse
+fault_classes:
+  - NONE
+adversary_classes:
+  - NONE
+bond_multipliers:
+  - 0.5
+  - 1
+  - 2
+  - 5
+  - 10
+  - 20

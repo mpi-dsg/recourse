@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "contractId": "0x49b4d1e81ceec50d64f53dea0ad2bd3f60af46e3f324265e666a1b4ea9d35c74",
+  "operator": "0xAa00000000000000000000000000000000000001",
+  "actionTemplate": {
+    "tool": "postgres",
+    "action": "bulkDelete"
+  },
+  "resourceScope": {
+    "type": "postgres-table",
+    "descriptor": {
+      "database": "tenant_main",
+      "schema": "public",
+      "table": "records",
+      "tenantId": "t-7c4e"
+    }
+  },
+  "effectClass": "compensable",
+  "recoveryOperator": {
+    "compensatorId": "postgres.snapshot.restore.v1",
+    "freshnessSeconds": 3600,
+    "retentionSeconds": 1209600,
+    "authPolicyHash": "0xaaaa000000000000000000000000000000000000000000000000000000000001"
+  },
+  "coveredLossClass": {
+    "codes": ["rows_deleted", "downtime_seconds", "manual_recovery_effort"],
+    "excludeList": ["data_exfiltration", "public_disclosure", "uncapped_downstream"]
+  },
+  "payoutRule": {
+    "type": "composite",
+    "params": {
+      "components": [
+        {
+          "type": "rowCountSchedule",
+          "weight": 1,
+          "params": { "perRowUsd": "0.10", "minPayoutUsd": "5.00" }
+        },
+        {
+          "type": "downtimeSchedule",
+          "weight": 1,
+          "params": { "perSecondUsd": "0.05", "thresholdSeconds": 30 }
+        }
+      ]
+    },
+    "maxPayout": "1000000000"
+  },
+  "bond": {
+    "asset": "0x0000000000000000000000000000000000aaaaaa",
+    "minAmount": "5000000000",
+    "maxAggregateExposure": "10000000000"
+  },
+  "evidenceSchema": {
+    "schemaId": "0xbbbb000000000000000000000000000000000000000000000000000000000001",
+    "requiredProvenance": "L1",
+    "accessPolicyHash": "0xcccc000000000000000000000000000000000000000000000000000000000001"
+  },
+  "deadlines": {
+    "recoverySeconds": 1800,
+    "submissionSeconds": 86400,
+    "livenessSeconds": 21600
+  },
+  "disputeRoute": {
+    "arbitrator": "0x000000000000000000000000000000000000d100",
+    "evidenceGroupId": "1001"
+  }
+}

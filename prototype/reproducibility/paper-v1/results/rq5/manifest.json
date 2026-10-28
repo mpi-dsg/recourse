@@ -1,0 +1,51 @@
+{
+  "artifacts": 50,
+  "budgetFileHash": "sha256:45b2e067b39db36a8cd00891f3647099f491af2e16036a40d9edc9b41c5a27d3",
+  "config": {
+    "approval_rate": 1.0,
+    "baselines": [
+      "recourse"
+    ],
+    "budget_file_hash": "sha256:45b2e067b39db36a8cd00891f3647099f491af2e16036a40d9edc9b41c5a27d3",
+    "concurrency": 1,
+    "failure_density": 0.6,
+    "fault_classes": [
+      "NONE",
+      "OBS_HIDE_PRESTATE",
+      "OBS_REMOVE_PROVIDER_SIG",
+      "OBS_AMBIGUOUS_RESOURCE",
+      "REC_STALE_SNAPSHOT",
+      "REC_INVALID_ARTIFACT",
+      "REC_PARTIAL_FAILURE",
+      "BND_OUT_OF_CAP_LOSS",
+      "BND_DOWNSTREAM_LEAK",
+      "CMP_SUBJECTIVE_RULE"
+    ],
+    "num_calls": 20,
+    "repetitions": 5,
+    "rq": "rq5",
+    "schemaVersion": 1,
+    "seed": 99,
+    "workloads": [
+      "postgres"
+    ]
+  },
+  "contractAddresses": {},
+  "gitCommit": "67212e27f82e4c4ec3e6528423d493bae3d55166",
+  "gitDirty": true,
+  "rpcBlockHeight": null,
+  "rpcEndpoint": "local-synthetic",
+  "rq": "rq5",
+  "schemaVersion": 1,
+  "schemaVersions": {
+    "claim": 1,
+    "effectReceipt": 1,
+    "recourseContract": 1,
+    "recoveryReceipt": 1
+  },
+  "seedHash": "8c1f1046219ddd216a023f792356ddf127fce372a72ec9b4cdac989ee5b0b455",
+  "toolVersions": {
+    "harness": "0.1.0",
+    "python": "3.12.13"
+  }
+}

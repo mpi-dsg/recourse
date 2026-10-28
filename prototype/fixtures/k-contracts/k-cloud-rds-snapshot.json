@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "contractId": "0x11fab917b5ec333affbf0ed0523ff1c05dfee9dc1e0fbeb217685569623bf5c6",
+  "operator": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "actionTemplate": {
+    "tool": "cloud",
+    "action": "rdsSnapshotLifecycle"
+  },
+  "resourceScope": {
+    "type": "cloud-resource",
+    "descriptor": {
+      "accountId": "123456789012",
+      "region": "us-east-1",
+      "resourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:prod-orders",
+      "clusterIdentifier": "prod-orders"
+    }
+  },
+  "effectClass": "compensable",
+  "recoveryOperator": {
+    "compensatorId": "cloud.rds.snapshot.restore.v1",
+    "freshnessSeconds": 1800,
+    "retentionSeconds": 2592000,
+    "authPolicyHash": "0xaaaa000000000000000000000000000000000000000000000000000000000105"
+  },
+  "coveredLossClass": {
+    "codes": ["downtime_seconds", "manual_recovery_effort", "excess_spend_usd"],
+    "excludeList": ["data_exfiltration", "public_disclosure", "physical_action", "uncapped_downstream"]
+  },
+  "payoutRule": {
+    "type": "excessSpendSchedule",
+    "params": {
+      "coverageRatio": "1.00",
+      "deductibleUsd": "0.00",
+      "fixedPayoutUsd": "750.00"
+    },
+    "maxPayout": "750000000"
+  },
+  "bond": {
+    "asset": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "minAmount": "7500000000",
+    "maxAggregateExposure": "7500000000"
+  },
+  "evidenceSchema": {
+    "schemaId": "0xbbbb000000000000000000000000000000000000000000000000000000000105",
+    "requiredProvenance": "L1",
+    "accessPolicyHash": "0xcccc000000000000000000000000000000000000000000000000000000000105"
+  },
+  "deadlines": {
+    "recoverySeconds": 1800,
+    "submissionSeconds": 86400,
+    "livenessSeconds": 21600
+  },
+  "disputeRoute": {
+    "arbitrator": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+    "evidenceGroupId": "1105"
+  }
+}

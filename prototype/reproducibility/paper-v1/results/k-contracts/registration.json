@@ -1,0 +1,52 @@
+{
+  "kContracts": [
+    {
+      "name": "k-postgres-update",
+      "hash": "0x399e2ab03e06913d64b6a6bdb7b407f0c6689c89789b5e3414caf423c3b7f530",
+      "scope": "postgres-table",
+      "maxPayout": "1000000000",
+      "bond": "10000000000",
+      "compensatorId": "postgres.snapshot.restore.v1",
+      "gas": 552711
+    },
+    {
+      "name": "k-postgres-ddl",
+      "hash": "0xcd1572ca369430356126680ba9076e0d3f793a6d2cc37e0ddd99b6501e3c1f4a",
+      "scope": "postgres-table",
+      "maxPayout": "5000000000",
+      "bond": "50000000000",
+      "compensatorId": "postgres.migration.replay.v1",
+      "gas": 552711
+    },
+    {
+      "name": "k-git-pushforce",
+      "hash": "0xa5bba3473a5ce3271dab19fe202f2a90ee7f3a4a68ae20d54c68e7a542d0c9f5",
+      "scope": "git-ref",
+      "maxPayout": "500000000",
+      "bond": "5000000000",
+      "compensatorId": "git.reflog.restore.v1",
+      "gas": 552711
+    },
+    {
+      "name": "k-cloud-ssm",
+      "hash": "0x801b3b82932299be2bbb18babd123a87a2aa20c064fc49a1d23defa7658b3e78",
+      "scope": "cloud-resource",
+      "maxPayout": "1500000000",
+      "bond": "15000000000",
+      "compensatorId": "cloud.ssm.priorVersion.restore.v1",
+      "gas": 552711
+    },
+    {
+      "name": "k-cloud-rds-snapshot",
+      "hash": "0x11fab917b5ec333affbf0ed0523ff1c05dfee9dc1e0fbeb217685569623bf5c6",
+      "scope": "cloud-resource",
+      "maxPayout": "750000000",
+      "bond": "7500000000",
+      "compensatorId": "cloud.rds.snapshot.restore.v1",
+      "gas": 552711
+    }
+  ],
+  "registryAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "rpcEndpoint": "anvil-in-process",
+  "chainId": 31337
+}

@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "Synthetic metrics are deterministic outputs of the pinned harness configuration.",
+    "Provider timings are retained as raw local-sandbox observations but excluded from paper-facing tables because they vary across machines.",
+    "The checksum file binds every frozen byte used to rebuild the paper."
+  ],
+  "resultsSource": "/tmp/recourse-final-e2e-20260729-c",
+  "schemaVersion": 1,
+  "sourceCommit": "67212e27f82e4c4ec3e6528423d493bae3d55166",
+  "sourceTreeDirtyAtFreeze": true,
+  "sourceTreeSha256": "e15545bcee10638f24eaa6419417a9788cc3890be670185ba90e0fee998d3f03"
+}

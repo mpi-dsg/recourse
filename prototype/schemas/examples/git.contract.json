@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "contractId": "0x2206dbd241e07d2609011f173e872b9345c5299c0aa7e32df115bf81e9f784e6",
+  "operator": "0xAa00000000000000000000000000000000000002",
+  "actionTemplate": {
+    "tool": "git",
+    "action": "forcePush"
+  },
+  "resourceScope": {
+    "type": "git-ref",
+    "descriptor": {
+      "repoUrl": "https://git.example.com/tenant/repo.git",
+      "ref": "refs/heads/main",
+      "branchPattern": "refs/heads/release/*"
+    }
+  },
+  "effectClass": "compensable",
+  "recoveryOperator": {
+    "compensatorId": "git.reflog.restore.v1",
+    "freshnessSeconds": 7200,
+    "retentionSeconds": 604800,
+    "authPolicyHash": "0xaaaa000000000000000000000000000000000000000000000000000000000002"
+  },
+  "coveredLossClass": {
+    "codes": ["history_bytes_lost", "manual_recovery_effort"],
+    "excludeList": ["data_exfiltration", "irreversible_transfer", "uncapped_downstream"]
+  },
+  "payoutRule": {
+    "type": "composite",
+    "params": {
+      "components": [
+        {
+          "type": "rowCountSchedule",
+          "weight": 1,
+          "params": { "perRowUsd": "0.50", "minPayoutUsd": "10.00" }
+        }
+      ]
+    },
+    "maxPayout": "500000000"
+  },
+  "bond": {
+    "asset": "0x0000000000000000000000000000000000aaaaaa",
+    "minAmount": "2500000000",
+    "maxAggregateExposure": "5000000000"
+  },
+  "evidenceSchema": {
+    "schemaId": "0xbbbb000000000000000000000000000000000000000000000000000000000002",
+    "requiredProvenance": "L2",
+    "accessPolicyHash": "0xcccc000000000000000000000000000000000000000000000000000000000002"
+  },
+  "deadlines": {
+    "recoverySeconds": 3600,
+    "submissionSeconds": 172800,
+    "livenessSeconds": 21600
+  },
+  "disputeRoute": {
+    "arbitrator": "0x000000000000000000000000000000000000d100",
+    "evidenceGroupId": "1002"
+  }
+}

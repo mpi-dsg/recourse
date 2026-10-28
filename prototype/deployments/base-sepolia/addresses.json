@@ -1,0 +1,17 @@
+{
+  "blockNumber": 44780966,
+  "chainId": 84532,
+  "commit": "67212e27f82e4c4ec3e6528423d493bae3d55166",
+  "contracts": {
+    "ArbitrablePath": "0xde04ae61ca34415fe1a773f51ec43f3ef6aefb24",
+    "BondVault": "0x5a5b09330e92c9e9bb62df301e4d67c0b12be9f7",
+    "ClaimRegistry": "0x418caf8361e0fd9da0f3269b1c8fa74107cce8c5",
+    "MockArbitrator": "0xd5bd7cb315cd3cd7b3d5b8aef243f1752bed06f5",
+    "OptimisticPath": "0xc340a85620adb6b4f32c0876a1ccfb4c068f8f7d",
+    "RecourseRegistry": "0x1e52d19a8bfe6faee87ad66340b0dd8021a45cb8"
+  },
+  "deployedAt": 1785330219675,
+  "notes": "ERC792 arbitrator is a MockArbitrator deployed in the same broadcast because Kleros L2 is not deployed on Base Sepolia. UMA OOv3 and USDC are live.",
+  "rpcEndpointLabel": "base-sepolia",
+  "schemaVersion": 1
+}

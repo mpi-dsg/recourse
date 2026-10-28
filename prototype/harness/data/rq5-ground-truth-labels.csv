@@ -1,0 +1,11 @@
+fault_class,annotator_a_harness,annotator_b_oracle,agreement,resolution,notes
+NONE,optimistic,optimistic,1,optimistic,Clean execution; all predicates pass.
+OBS_HIDE_PRESTATE,arbitrated,arbitrated,1,arbitrated,EvidenceOK failure but loss still in L.
+OBS_REMOVE_PROVIDER_SIG,arbitrated,arbitrated,1,arbitrated,Provenance drops below required level; covered loss class unaffected.
+OBS_AMBIGUOUS_RESOURCE,arbitrated,arbitrated,1,arbitrated,WithinScope ambiguity routes to arbitration when scope is not clearly violated.
+REC_STALE_SNAPSHOT,arbitrated,arbitrated,1,arbitrated,RecoveryOK predicate failure; loss inside cap.
+REC_INVALID_ARTIFACT,arbitrated,arbitrated,1,arbitrated,EvidenceOK on r; loss inside cap.
+REC_PARTIAL_FAILURE,arbitrated,excluded,0,arbitrated,"Disagreement. Annotator A reads the example contract's composite payout as covering partial outcomes (arbitrable). Annotator B reads partial as a recovery-evidence failure that escapes objective recourse. Resolution defers to annotator A under the assumption that the contract's payout rule explicitly covers partial outcomes per main.tex section III rule 2."
+BND_OUT_OF_CAP_LOSS,arbitrated,excluded,0,excluded,"Disagreement resolved as excluded per main.tex section III. Harness updated: classifier _residual_ok now fails when the uncapped payout exceeds maxPayout (boundedness), faults.py injects a row-count exceeding the cap rather than zeroing the bond, and FAULT_ROUTE_TABLE plus _EXPECTED_ROUTE_FOR_FAULT both read excluded."
+BND_DOWNSTREAM_LEAK,excluded,excluded,1,excluded,Uncapped downstream effect leaves objective recourse.
+CMP_SUBJECTIVE_RULE,arbitrated,arbitrated,1,arbitrated,Computability failure within L and cap.

@@ -1,0 +1,106 @@
+{
+  "baseSeeds": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ],
+  "config": {
+    "adversary_classes": [
+      "NONE",
+      "DISHONEST_CLAIMANT",
+      "ABSENT_CHALLENGER",
+      "BOND_STRESS",
+      "COLLUDING_CHALLENGERS"
+    ],
+    "approval_rate": 1.0,
+    "baselines": [
+      "recourse"
+    ],
+    "budget_file_hash": "sha256:45b2e067b39db36a8cd00891f3647099f491af2e16036a40d9edc9b41c5a27d3",
+    "concurrency": 4,
+    "failure_density": 0.6,
+    "fault_classes": [
+      "NONE"
+    ],
+    "num_calls": 24,
+    "repetitions": 5,
+    "rq": "rq5-adv",
+    "schemaVersion": 1,
+    "seed": 137,
+    "workloads": [
+      "postgres"
+    ]
+  },
+  "configHash": "sha256:6e4a93a1dd46620d4ecfda6315854bc4da277c43fd75659d71d054f88a320b1e",
+  "gitCommit": "67212e27f82e4c4ec3e6528423d493bae3d55166",
+  "gitDirty": true,
+  "perCellRepetitions": 1,
+  "perSeedRepetitions": 1,
+  "realizedSeeds": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ],
+  "rq": "rq5-adv",
+  "samplesPerCell": 10,
+  "schemaVersion": 1,
+  "seedSchedule": [
+    {
+      "baseSeed": 42,
+      "realizedSeed": 42
+    },
+    {
+      "baseSeed": 43,
+      "realizedSeed": 43
+    },
+    {
+      "baseSeed": 44,
+      "realizedSeed": 44
+    },
+    {
+      "baseSeed": 45,
+      "realizedSeed": 45
+    },
+    {
+      "baseSeed": 46,
+      "realizedSeed": 46
+    },
+    {
+      "baseSeed": 47,
+      "realizedSeed": 47
+    },
+    {
+      "baseSeed": 48,
+      "realizedSeed": 48
+    },
+    {
+      "baseSeed": 49,
+      "realizedSeed": 49
+    },
+    {
+      "baseSeed": 50,
+      "realizedSeed": 50
+    },
+    {
+      "baseSeed": 51,
+      "realizedSeed": 51
+    }
+  ],
+  "sourceConfigRepetitions": 5,
+  "statisticalUnit": "independent_trace_seed",
+  "totalArtifacts": 50
+}

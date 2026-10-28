@@ -1,0 +1,22 @@
+[profile.default]
+src = "src"
+test = "test"
+script = "script"
+out = "out"
+libs = ["lib"]
+solc = "0.8.24"
+optimizer = true
+optimizer_runs = 200
+via_ir = false
+fuzz = { runs = 256 }
+gas_reports = ["*"]
+# Allow RegisterFixtures.s.sol to read κ-contract JSON fixtures and write
+# the registration summary. Scoped to the k-contracts catalogue only.
+fs_permissions = [
+    { access = "read", path = "../fixtures/k-contracts" },
+    { access = "read-write", path = "../results/k-contracts" },
+    { access = "read-write", path = "../results/.k-contracts-staging" },
+]
+
+[profile.ci]
+fuzz = { runs = 1000 }

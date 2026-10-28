@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://recourse.systems/schemas/effect_receipt.v1.json",
+  "title": "EffectReceipt",
+  "description": "EIP-712 typed receipt emitted by the tool adapter after the compensable action runs. Realizes the observable evidence object o = effect evidence in the settleability model (main.tex:127).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractId",
+    "jobId",
+    "intentHash",
+    "paramsHash",
+    "resourceId",
+    "preStateDigest",
+    "postStateDigest",
+    "timestamp",
+    "adapterAddress",
+    "signature"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "description": "Must equal the registered κ schemaVersion or the ClaimRegistry rejects the commit."
+    },
+    "contractId": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$",
+      "description": "Identifier of the κ this action was admitted under."
+    },
+    "jobId": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$",
+      "description": "Adapter-issued job identifier; one EffectReceipt per jobId."
+    },
+    "intentHash": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$",
+      "description": "Hash of the agent's intent (natural-language or structured) at decision time. Binding evidence that the dispatched action matches what the agent meant."
+    },
+    "paramsHash": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$",
+      "description": "Hash of the canonical, sorted parameter blob dispatched to the adapter."
+    },
+    "resourceId": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$",
+      "description": "Hash of the (scope-conforming) resource identifier touched by this action."
+    },
+    "preStateDigest": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$",
+      "description": "Adapter-computed digest of state before execution. For Postgres: hash of (table_oid, snapshot_lsn, predicate_count). For Git: hash of (oid_before, branch_tip_oid). For Cloud: hash of canonical-JSON of the pre-state config."
+    },
+    "postStateDigest": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$",
+      "description": "Adapter-computed digest of state after execution. Same shape as preStateDigest per workload."
+    },
+    "providerReceiptHash": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$",
+      "description": "Optional. Hash of a provider-attested receipt (Level-1 evidence). Required if κ.evidenceSchema.requiredProvenance == L1."
+    },
+    "timestamp": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Unix seconds at which the adapter emitted the receipt."
+    },
+    "adapterAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$",
+      "description": "Public key (ECDSA) the adapter used to sign this receipt."
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{130}$",
+      "description": "65-byte ECDSA signature over the EIP-712 digest of this receipt (mode = personal/EIP-191 disallowed; must be EIP-712 typed-data)."
+    }
+  }
+}

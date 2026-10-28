@@ -1,0 +1,24 @@
+# RQ3 — Performance, latency, capital cost (main.tex §IX.E).
+# Vary concurrency to surface tool-execution overhead and finalisation
+# latency. The budgets file gates pass/fail thresholds.
+
+schemaVersion: 1
+rq: rq3
+workloads:
+  - postgres
+seed: 7
+num_calls: 60
+failure_density: 0.25
+concurrencies:
+  - 1
+  - 4
+  - 8
+  - 16
+  - 32
+approval_rate: 1.0
+repetitions: 5
+baselines:
+  - centralized
+  - recourse
+fault_classes:
+  - NONE

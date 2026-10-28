@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "contractId": "0xcd1572ca369430356126680ba9076e0d3f793a6d2cc37e0ddd99b6501e3c1f4a",
+  "operator": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "actionTemplate": {
+    "tool": "postgres",
+    "action": "schemaScopedDdl"
+  },
+  "resourceScope": {
+    "type": "postgres-table",
+    "descriptor": {
+      "database": "tenant_main",
+      "schema": "analytics",
+      "table": "*",
+      "tenantId": "t-7c4e",
+      "verbs": ["CREATE TABLE", "DROP TABLE"]
+    }
+  },
+  "effectClass": "compensable",
+  "recoveryOperator": {
+    "compensatorId": "postgres.migration.replay.v1",
+    "freshnessSeconds": 7200,
+    "retentionSeconds": 2592000,
+    "authPolicyHash": "0xaaaa000000000000000000000000000000000000000000000000000000000102"
+  },
+  "coveredLossClass": {
+    "codes": ["downtime_seconds", "manual_recovery_effort", "rows_modified"],
+    "excludeList": ["data_exfiltration", "public_disclosure", "irreversible_transfer", "uncapped_downstream"]
+  },
+  "payoutRule": {
+    "type": "composite",
+    "params": {
+      "components": [
+        {
+          "type": "downtimeSchedule",
+          "weight": 1,
+          "params": { "perSecondUsd": "0.25", "thresholdSeconds": 60 }
+        },
+        {
+          "type": "rowCountSchedule",
+          "weight": 1,
+          "params": { "perRowUsd": "0.05", "minPayoutUsd": "25.00" }
+        }
+      ]
+    },
+    "maxPayout": "5000000000"
+  },
+  "bond": {
+    "asset": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "minAmount": "50000000000",
+    "maxAggregateExposure": "50000000000"
+  },
+  "evidenceSchema": {
+    "schemaId": "0xbbbb000000000000000000000000000000000000000000000000000000000102",
+    "requiredProvenance": "L1",
+    "accessPolicyHash": "0xcccc000000000000000000000000000000000000000000000000000000000102"
+  },
+  "deadlines": {
+    "recoverySeconds": 3600,
+    "submissionSeconds": 172800,
+    "livenessSeconds": 43200
+  },
+  "disputeRoute": {
+    "arbitrator": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+    "evidenceGroupId": "1102"
+  }
+}

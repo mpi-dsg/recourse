@@ -1,0 +1,1170 @@
+[
+  {
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "registry_",
+        "type": "address",
+        "internalType": "contract RecourseRegistry"
+      },
+      {
+        "name": "vault_",
+        "type": "address",
+        "internalType": "contract BondVault"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "OWNER",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "REGISTRY",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract RecourseRegistry"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "VAULT",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract BondVault"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "applyArbitration",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "outcome",
+        "type": "uint8",
+        "internalType": "enum ArbitrationOutcome"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "assertCanAssertOptimistic",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "assertionLivenessSeconds",
+        "type": "uint64",
+        "internalType": "uint64"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "assertCanEscalate",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "arbitrablePath",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "commitReceipts",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "ec",
+        "type": "tuple",
+        "internalType": "struct ClaimRegistry.EffectReceiptCommit",
+        "components": [
+          {
+            "name": "schemaVersion",
+            "type": "uint16",
+            "internalType": "uint16"
+          },
+          {
+            "name": "receiptHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "provenance",
+            "type": "uint8",
+            "internalType": "enum RecourseTypes.Provenance"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "evidenceHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          }
+        ]
+      },
+      {
+        "name": "rc",
+        "type": "tuple",
+        "internalType": "struct ClaimRegistry.RecoveryReceiptCommit",
+        "components": [
+          {
+            "name": "schemaVersion",
+            "type": "uint16",
+            "internalType": "uint16"
+          },
+          {
+            "name": "receiptHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "outcome",
+            "type": "uint8",
+            "internalType": "enum RecourseTypes.RecoveryOutcome"
+          },
+          {
+            "name": "provenance",
+            "type": "uint8",
+            "internalType": "enum RecourseTypes.Provenance"
+          },
+          {
+            "name": "recoveryEndTs",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "dispute",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "finalizeOptimistic",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "getClaim",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct ClaimRegistry.ClaimRecord",
+        "components": [
+          {
+            "name": "contractId",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "jobId",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "claimant",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amount",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "evidenceCid",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "route",
+            "type": "uint8",
+            "internalType": "enum ClaimRoute"
+          },
+          {
+            "name": "state",
+            "type": "uint8",
+            "internalType": "enum ClaimState"
+          },
+          {
+            "name": "livenessDeadline",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "arbitrator",
+            "type": "address",
+            "internalType": "address"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getReceiptRecord",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct ClaimRegistry.ReceiptRecord",
+        "components": [
+          {
+            "name": "effectReceiptHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "effectProvenance",
+            "type": "uint8",
+            "internalType": "enum RecourseTypes.Provenance"
+          },
+          {
+            "name": "effectTimestamp",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "effectEvidenceHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "recoveryReceiptHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "recoveryOutcome",
+            "type": "uint8",
+            "internalType": "enum RecourseTypes.RecoveryOutcome"
+          },
+          {
+            "name": "recoveryProvenance",
+            "type": "uint8",
+            "internalType": "enum RecourseTypes.Provenance"
+          },
+          {
+            "name": "recoveryEndTs",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "recordedAt",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "exists",
+            "type": "bool",
+            "internalType": "bool"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "livenessDeadlineOf",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "optimisticPath",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "receiptKey",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "routeOf",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "enum ClaimRoute"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "setOptimisticPath",
+    "inputs": [
+      {
+        "name": "optimisticPath_",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "stateOf",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "enum ClaimState"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "submitClaim",
+    "inputs": [
+      {
+        "name": "c",
+        "type": "tuple",
+        "internalType": "struct RecourseTypes.Claim",
+        "components": [
+          {
+            "name": "schemaVersion",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "contractId",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "jobId",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "claimant",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amount",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "evidenceCidHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "effectReceiptHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "recoveryReceiptHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "routeHint",
+            "type": "uint8",
+            "internalType": "enum RecourseTypes.RouteHint"
+          }
+        ]
+      },
+      {
+        "name": "signature",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "event",
+    "name": "ClaimDisputed",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "challenger",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "ClaimFinalized",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "state",
+        "type": "uint8",
+        "indexed": true,
+        "internalType": "enum ClaimState"
+      },
+      {
+        "name": "claimant",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "ClaimSubmitted",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "claimant",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "route",
+        "type": "uint8",
+        "indexed": false,
+        "internalType": "enum ClaimRoute"
+      },
+      {
+        "name": "livenessDeadline",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "OptimisticPathSet",
+    "inputs": [
+      {
+        "name": "optimisticPath",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "ReceiptsCommitted",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "effectReceiptHash",
+        "type": "bytes32",
+        "indexed": false,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "recoveryReceiptHash",
+        "type": "bytes32",
+        "indexed": false,
+        "internalType": "bytes32"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "AmountExceedsMaxPayout",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "maxPayout",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ClaimAlreadySubmitted",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ClaimContractMismatch",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "expected",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "actual",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ClaimEvidenceMismatch",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "expected",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "actual",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ClaimReceiptMismatch",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ContractNotAdmissible",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ECDSAInvalidSignature",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ECDSAInvalidSignatureLength",
+    "inputs": [
+      {
+        "name": "length",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ECDSAInvalidSignatureS",
+    "inputs": [
+      {
+        "name": "s",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "EffectTimestampInFuture",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "timestamp",
+        "type": "uint64",
+        "internalType": "uint64"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidClaimSignature",
+    "inputs": [
+      {
+        "name": "expected",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "actual",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidClaimState",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "state",
+        "type": "uint8",
+        "internalType": "enum ClaimState"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidRecoveryReceipt",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "LivenessActive",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "LivenessExpired",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotArbitrated",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotArbitrator",
+    "inputs": [
+      {
+        "name": "caller",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "expected",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotOptimistic",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotOptimisticPath",
+    "inputs": [
+      {
+        "name": "caller",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "expected",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotOwner",
+    "inputs": [
+      {
+        "name": "caller",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "owner",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotReceiptCommitter",
+    "inputs": [
+      {
+        "name": "caller",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "operator",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "OptimisticPathAlreadySet",
+    "inputs": [
+      {
+        "name": "current",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ReceiptAlreadyCommitted",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "RecoveryDeadlineExpired",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "deadline",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "recoveredAt",
+        "type": "uint64",
+        "internalType": "uint64"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "RecoveryDeadlinePending",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "readyAt",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "SchemaVersionMismatch",
+    "inputs": [
+      {
+        "name": "expected",
+        "type": "uint16",
+        "internalType": "uint16"
+      },
+      {
+        "name": "actual",
+        "type": "uint16",
+        "internalType": "uint16"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "SubmissionDeadlineExpired",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "deadline",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "UnknownClaim",
+    "inputs": [
+      {
+        "name": "claimId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "UnknownReceiptCommit",
+    "inputs": [
+      {
+        "name": "contractId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "jobId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ZeroAddress",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ZeroAmount",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ZeroEvidenceCid",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ZeroEvidenceHash",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ZeroReceiptHash",
+    "inputs": []
+  }
+]

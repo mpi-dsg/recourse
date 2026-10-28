@@ -1,0 +1,56 @@
+{
+  "artifacts": 25,
+  "budgetFileHash": "sha256:45b2e067b39db36a8cd00891f3647099f491af2e16036a40d9edc9b41c5a27d3",
+  "config": {
+    "adversary_classes": [
+      "NONE"
+    ],
+    "approval_rate": 1.0,
+    "baselines": [
+      "recourse"
+    ],
+    "bond_multipliers": [
+      10
+    ],
+    "budget_file_hash": "sha256:45b2e067b39db36a8cd00891f3647099f491af2e16036a40d9edc9b41c5a27d3",
+    "concurrency": 3,
+    "correlation_burst_sizes": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "correlation_prob": 0.3,
+    "failure_density": 0.5,
+    "fault_classes": [
+      "NONE"
+    ],
+    "num_calls": 30,
+    "repetitions": 5,
+    "rq": "rq10",
+    "schemaVersion": 1,
+    "seed": 42,
+    "workloads": [
+      "postgres"
+    ]
+  },
+  "contractAddresses": {},
+  "gitCommit": "67212e27f82e4c4ec3e6528423d493bae3d55166",
+  "gitDirty": true,
+  "rpcBlockHeight": null,
+  "rpcEndpoint": "local-synthetic",
+  "rq": "rq10",
+  "schemaVersion": 1,
+  "schemaVersions": {
+    "claim": 1,
+    "effectReceipt": 1,
+    "recourseContract": 1,
+    "recoveryReceipt": 1
+  },
+  "seedHash": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049",
+  "toolVersions": {
+    "harness": "0.1.0",
+    "python": "3.12.13"
+  }
+}

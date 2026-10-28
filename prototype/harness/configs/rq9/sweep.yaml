@@ -1,0 +1,31 @@
+# RQ9 — Approval-rate sweep / proper autonomy frontier (reviewer follow-up).
+# Sweeps the operator approval rate across {0, .2, .4, .6, .8, 1} for every
+# baseline so the autonomy-vs-residual-loss frontier can be drawn as a curve
+# per baseline rather than a single point per baseline (cf. RQ1).
+
+schemaVersion: 1
+rq: rq9
+workloads:
+  - postgres
+seed: 42
+num_calls: 24
+failure_density: 0.5
+concurrency: 3
+repetitions: 5
+baselines:
+  - none
+  - human
+  - oap
+  - centralized
+  - recourse
+fault_classes:
+  - NONE
+adversary_classes:
+  - NONE
+approval_rates:
+  - 0.0
+  - 0.2
+  - 0.4
+  - 0.6
+  - 0.8
+  - 1.0

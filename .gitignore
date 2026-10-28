@@ -1,0 +1,52 @@
+# Foundry
+prototype/contracts/out/
+prototype/contracts/cache/
+prototype/contracts/broadcast/
+prototype/contracts/lib/
+!prototype/contracts/lib/.gitkeep
+
+# Node
+prototype/runtime-ts/**/node_modules/
+prototype/runtime-ts/**/dist/
+prototype/runtime-ts/**/coverage/
+prototype/runtime-ts/**/.turbo/
+
+# Python
+prototype/**/.venv/
+prototype/**/__pycache__/
+prototype/**/*.egg-info/
+prototype/**/.pytest_cache/
+prototype/**/.ruff_cache/
+prototype/**/.mypy_cache/
+prototype/**/.hypothesis/
+prototype/**/.coverage
+prototype/**/htmlcov/
+prototype/.coverage-tmp/
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local deployments
+prototype/deployments/local/
+prototype/deployments/*/simulation*.json
+
+# Results from harness runs (artifact comes from snapshot scripts)
+prototype/results/
+prototype/artifacts/
+
+# Local paper copies and release-prep scratch space
+prototype/main.tex
+trash/
+_archive/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.log
+*.tmp

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "contractId": "0x598d5d93478a1711e03348d2221e63aa02b859ad8ae334391beeef4dce7343d1",
+  "operator": "0xAa00000000000000000000000000000000000003",
+  "actionTemplate": {
+    "tool": "cloud",
+    "action": "updateAutoscalingGroup"
+  },
+  "resourceScope": {
+    "type": "cloud-resource",
+    "descriptor": {
+      "accountId": "123456789012",
+      "region": "us-east-1",
+      "resourceArn": "arn:aws:autoscaling:us-east-1:123456789012:autoScalingGroup:abcd:autoScalingGroupName/api-fleet"
+    }
+  },
+  "effectClass": "compensable",
+  "recoveryOperator": {
+    "compensatorId": "cloud.config.rollback.v1",
+    "freshnessSeconds": 600,
+    "retentionSeconds": 2592000,
+    "authPolicyHash": "0xaaaa000000000000000000000000000000000000000000000000000000000003"
+  },
+  "coveredLossClass": {
+    "codes": ["downtime_seconds", "excess_spend_usd"],
+    "excludeList": ["data_exfiltration", "public_disclosure", "physical_action", "uncapped_downstream"]
+  },
+  "payoutRule": {
+    "type": "excessSpendSchedule",
+    "params": { "coverageRatio": "0.80", "deductibleUsd": "25.00" },
+    "maxPayout": "2500000000"
+  },
+  "bond": {
+    "asset": "0x0000000000000000000000000000000000aaaaaa",
+    "minAmount": "10000000000",
+    "maxAggregateExposure": "25000000000"
+  },
+  "evidenceSchema": {
+    "schemaId": "0xbbbb000000000000000000000000000000000000000000000000000000000003",
+    "requiredProvenance": "L1",
+    "accessPolicyHash": "0xcccc000000000000000000000000000000000000000000000000000000000003"
+  },
+  "deadlines": {
+    "recoverySeconds": 900,
+    "submissionSeconds": 172800,
+    "livenessSeconds": 43200
+  },
+  "disputeRoute": {
+    "arbitrator": "0x000000000000000000000000000000000000d100",
+    "evidenceGroupId": "1003"
+  }
+}

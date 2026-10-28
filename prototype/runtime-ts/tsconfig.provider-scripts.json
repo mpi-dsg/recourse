@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "declaration": false,
+    "declarationMap": false,
+    "noEmit": true
+  },
+  "include": [
+    "../scripts/provider-bench-cloud.ts",
+    "../scripts/provider-bench-git.ts",
+    "../scripts/replay-cloud-receipts.ts",
+    "../scripts/replay-git-receipts.ts",
+    "../scripts/replay-postgres-receipts.ts",
+    "packages/adapter-postgres/bench/provider-postgres.ts"
+  ]
+}

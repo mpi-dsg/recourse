@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this prototype or evaluation artifact, please cite the Recourse paper."
+title: "Bonded Recourse for Smart-Contract Settlement of Compensable Agent Side Effects"
+type: software
+authors:
+  - family-names: Bindschaedler
+    given-names: Laurent
+    affiliation: Max Planck Institute for Software Systems
+  - family-names: Botha
+    given-names: Quentin
+    affiliation: Vienna University of Economics and Business
+  - family-names: Siebenbrunner
+    given-names: Christoph
+    affiliation: Vienna University of Economics and Business
+license: MIT
+preferred-citation:
+  type: conference-paper
+  title: "Bonded Recourse for Smart-Contract Settlement of Compensable Agent Side Effects"
+  authors:
+    - family-names: Bindschaedler
+      given-names: Laurent
+    - family-names: Botha
+      given-names: Quentin
+    - family-names: Siebenbrunner
+      given-names: Christoph
+  collection-title: "Proceedings of the IEEE International Conference on Blockchain Computing and Applications (BCCA)"
+  year: 2026

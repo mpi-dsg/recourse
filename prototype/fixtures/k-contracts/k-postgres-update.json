@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "contractId": "0x399e2ab03e06913d64b6a6bdb7b407f0c6689c89789b5e3414caf423c3b7f530",
+  "operator": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "actionTemplate": {
+    "tool": "postgres",
+    "action": "schemaScopedDml"
+  },
+  "resourceScope": {
+    "type": "postgres-table",
+    "descriptor": {
+      "database": "tenant_main",
+      "schema": "billing",
+      "table": "*",
+      "tenantId": "t-7c4e",
+      "verbs": ["UPDATE", "DELETE"]
+    }
+  },
+  "effectClass": "compensable",
+  "recoveryOperator": {
+    "compensatorId": "postgres.snapshot.restore.v1",
+    "freshnessSeconds": 3600,
+    "retentionSeconds": 1209600,
+    "authPolicyHash": "0xaaaa000000000000000000000000000000000000000000000000000000000101"
+  },
+  "coveredLossClass": {
+    "codes": ["rows_deleted", "rows_modified", "manual_recovery_effort"],
+    "excludeList": ["data_exfiltration", "public_disclosure", "irreversible_transfer", "uncapped_downstream"]
+  },
+  "payoutRule": {
+    "type": "rowCountSchedule",
+    "params": {
+      "perRowUsd": "0.10",
+      "minPayoutUsd": "5.00"
+    },
+    "maxPayout": "1000000000"
+  },
+  "bond": {
+    "asset": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "minAmount": "10000000000",
+    "maxAggregateExposure": "10000000000"
+  },
+  "evidenceSchema": {
+    "schemaId": "0xbbbb000000000000000000000000000000000000000000000000000000000101",
+    "requiredProvenance": "L1",
+    "accessPolicyHash": "0xcccc000000000000000000000000000000000000000000000000000000000101"
+  },
+  "deadlines": {
+    "recoverySeconds": 1800,
+    "submissionSeconds": 86400,
+    "livenessSeconds": 21600
+  },
+  "disputeRoute": {
+    "arbitrator": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+    "evidenceGroupId": "1101"
+  }
+}

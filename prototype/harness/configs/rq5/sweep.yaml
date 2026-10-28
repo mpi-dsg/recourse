@@ -1,0 +1,27 @@
+# RQ5 — Robustness under predicate failures (main.tex §IX.G).
+# All FaultClass injectors against the full baseline matrix so the routing
+# confusion matrix has cells in every quadrant.
+
+schemaVersion: 1
+rq: rq5
+workloads:
+  - postgres
+seed: 99
+num_calls: 20
+failure_density: 0.6
+concurrency: 1
+approval_rate: 1.0
+repetitions: 5
+baselines:
+  - recourse
+fault_classes:
+  - NONE
+  - OBS_HIDE_PRESTATE
+  - OBS_REMOVE_PROVIDER_SIG
+  - OBS_AMBIGUOUS_RESOURCE
+  - REC_STALE_SNAPSHOT
+  - REC_INVALID_ARTIFACT
+  - REC_PARTIAL_FAILURE
+  - BND_OUT_OF_CAP_LOSS
+  - BND_DOWNSTREAM_LEAK
+  - CMP_SUBJECTIVE_RULE

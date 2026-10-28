@@ -1,0 +1,18 @@
+# RQ2 — Coverage of the settleable class (main.tex §IX.D).
+# Exercises the postgres workload under nominal conditions to measure
+# eligibility and objective-settlement rates.
+
+schemaVersion: 1
+rq: rq2
+workloads:
+  - postgres
+seed: 137
+num_calls: 30
+failure_density: 0.4
+concurrency: 2
+approval_rate: 1.0
+repetitions: 5
+baselines:
+  - recourse
+fault_classes:
+  - NONE

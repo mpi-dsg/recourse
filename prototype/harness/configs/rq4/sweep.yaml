@@ -1,0 +1,20 @@
+# RQ4 — Design ablations (main.tex §IX.F).
+# Compares full Recourse against centralized-custody and authorisation-only
+# variants to isolate the contribution of public challenge + neutral custody.
+
+schemaVersion: 1
+rq: rq4
+workload: postgres
+seed: 13
+num_calls: 30
+failure_density: 0.5
+concurrency: 2
+approval_rate: 0.7
+repetitions: 5
+baselines:
+  - oap
+  - atomix
+  - centralized
+  - recourse
+fault_classes:
+  - NONE

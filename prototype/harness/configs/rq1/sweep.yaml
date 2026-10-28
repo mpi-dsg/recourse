@@ -1,0 +1,23 @@
+# RQ1 — Autonomy versus residual loss (main.tex §IX.C).
+# Sweeps the autonomy threshold across all baselines on the postgres workload.
+
+schemaVersion: 1
+rq: rq1
+workloads:
+  - postgres
+seed: 42
+num_calls: 24
+failure_density: 0.5
+concurrency: 3
+approval_rate: 0.6
+repetitions: 5
+baselines:
+  - none
+  - human
+  - oap
+  - atomix
+  - auth_plus_local
+  - centralized
+  - recourse
+fault_classes:
+  - NONE

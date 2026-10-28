@@ -1,0 +1,114 @@
+{
+  "broadcastArtifactSha256": "3ec01a96f29c3a5b928f566b7f958a3d46c8f8e4ee14a8f6b860688fc87d947f",
+  "broadcastTimestamp": 1785330219675,
+  "chainId": 84532,
+  "declaredCommit": "67212e2",
+  "kind": "foundry-deployment-receipts",
+  "schemaVersion": 1,
+  "summary": {
+    "firstBlockNumber": 44780965,
+    "lastBlockNumber": 44780966,
+    "receiptCount": 8,
+    "totalExecutionGas": 7876242,
+    "totalL1Gas": 317769,
+    "transactionCount": 8
+  },
+  "transactions": [
+    {
+      "blockNumber": 44780965,
+      "contractAddress": "0xd5bd7cb315cd3cd7b3d5b8aef243f1752bed06f5",
+      "contractName": "MockArbitrator",
+      "effectiveGasPrice": 6000000,
+      "gasUsed": 385960,
+      "index": 0,
+      "l1GasUsed": 15285,
+      "status": 1,
+      "transactionHash": "0x152e90de178ff4b052b77b2dc069e61325eee2ee32f7b850c3b7f696ccf6e637",
+      "transactionType": "CREATE"
+    },
+    {
+      "blockNumber": 44780965,
+      "contractAddress": "0x1e52d19a8bfe6faee87ad66340b0dd8021a45cb8",
+      "contractName": "RecourseRegistry",
+      "effectiveGasPrice": 6000000,
+      "gasUsed": 1604349,
+      "index": 1,
+      "l1GasUsed": 66533,
+      "status": 1,
+      "transactionHash": "0x3f04664cf0359766948428e2a32caa8828c1f39010457196de9f7f66af2c3d08",
+      "transactionType": "CREATE"
+    },
+    {
+      "blockNumber": 44780965,
+      "contractAddress": "0x5a5b09330e92c9e9bb62df301e4d67c0b12be9f7",
+      "contractName": "BondVault",
+      "effectiveGasPrice": 6000000,
+      "gasUsed": 1445696,
+      "index": 2,
+      "l1GasUsed": 54688,
+      "status": 1,
+      "transactionHash": "0x89bfa3ecbd0a2bbe45320a3bd741332c88d9505a1f72aae597d5fe4a285a2e7b",
+      "transactionType": "CREATE"
+    },
+    {
+      "blockNumber": 44780966,
+      "contractAddress": "0x418caf8361e0fd9da0f3269b1c8fa74107cce8c5",
+      "contractName": "ClaimRegistry",
+      "effectiveGasPrice": 6000000,
+      "gasUsed": 2666954,
+      "index": 3,
+      "l1GasUsed": 100675,
+      "status": 1,
+      "transactionHash": "0x58d598ff8290000bb732acb660621dd01c92c9dfcab9cb628cda1999c9e8e986",
+      "transactionType": "CREATE"
+    },
+    {
+      "blockNumber": 44780966,
+      "contractAddress": "0x5a5b09330e92c9e9bb62df301e4d67c0b12be9f7",
+      "contractName": "BondVault",
+      "effectiveGasPrice": 6000000,
+      "gasUsed": 45286,
+      "index": 4,
+      "l1GasUsed": 1600,
+      "status": 1,
+      "transactionHash": "0xc58c1ed672336a1b244968f9738f594ceafe533b30a8d91beaa9af3e8ab85941",
+      "transactionType": "CALL"
+    },
+    {
+      "blockNumber": 44780966,
+      "contractAddress": "0xc340a85620adb6b4f32c0876a1ccfb4c068f8f7d",
+      "contractName": "OptimisticPath",
+      "effectiveGasPrice": 6000000,
+      "gasUsed": 984550,
+      "index": 5,
+      "l1GasUsed": 40608,
+      "status": 1,
+      "transactionHash": "0xe3563275872b94b65cfc9590e16c8b31e6ea7344feabed76794e2a4752c05a5c",
+      "transactionType": "CREATE"
+    },
+    {
+      "blockNumber": 44780966,
+      "contractAddress": "0x418caf8361e0fd9da0f3269b1c8fa74107cce8c5",
+      "contractName": "ClaimRegistry",
+      "effectiveGasPrice": 6000000,
+      "gasUsed": 45264,
+      "index": 6,
+      "l1GasUsed": 1600,
+      "status": 1,
+      "transactionHash": "0xbeec818873ad475df814ceaf6edacde18a688e137ba349731a922c4213e53c8f",
+      "transactionType": "CALL"
+    },
+    {
+      "blockNumber": 44780966,
+      "contractAddress": "0xde04ae61ca34415fe1a773f51ec43f3ef6aefb24",
+      "contractName": "ArbitrablePath",
+      "effectiveGasPrice": 6000000,
+      "gasUsed": 698183,
+      "index": 7,
+      "l1GasUsed": 36780,
+      "status": 1,
+      "transactionHash": "0x67bd0dd86eef961e78fcb8d349bbd56330d10d9c869529c4efa5b5977ab2ca4b",
+      "transactionType": "CREATE"
+    }
+  ]
+}

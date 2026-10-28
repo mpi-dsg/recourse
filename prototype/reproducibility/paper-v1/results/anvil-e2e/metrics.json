@@ -1,0 +1,135 @@
+{
+  "disputedPath": {
+    "operations": [
+      {
+        "contract": "RecourseRegistry",
+        "function": "register",
+        "gas": 578185,
+        "key": "register",
+        "label": "register",
+        "reportStatistic": "median"
+      },
+      {
+        "contract": "BondVault",
+        "function": "postBond",
+        "gas": 142314,
+        "key": "postBond",
+        "label": "postBond",
+        "reportStatistic": "median"
+      },
+      {
+        "contract": "ClaimRegistry",
+        "function": "commitReceipts",
+        "gas": 208542,
+        "key": "commitReceipts",
+        "label": "commitReceipts",
+        "reportStatistic": "median"
+      },
+      {
+        "contract": "ClaimRegistry",
+        "function": "submitClaim",
+        "gas": 410591,
+        "key": "submitClaim",
+        "label": "submitClaim",
+        "reportStatistic": "median"
+      },
+      {
+        "contract": "OptimisticPath",
+        "function": "assertResidualLoss",
+        "gas": 412187,
+        "key": "assertResidualLoss",
+        "label": "assertResidualLoss",
+        "reportStatistic": "median"
+      },
+      {
+        "contract": "MockOptimisticOracleV3",
+        "function": "dispute",
+        "gas": 66221,
+        "key": "dispute",
+        "label": "dispute",
+        "reportStatistic": "median"
+      },
+      {
+        "contract": "ArbitrablePath",
+        "function": "escalate",
+        "gas": 142143,
+        "key": "escalate",
+        "label": "escalate",
+        "reportStatistic": "median"
+      },
+      {
+        "contract": "MockArbitrator",
+        "function": "giveRuling",
+        "gas": 99668,
+        "key": "giveRuling",
+        "label": "giveRuling (rule + payout)",
+        "reportStatistic": "median"
+      }
+    ],
+    "test": "testDisputedOptimisticClaimEscalatesAndPaysByArbitration",
+    "totalCallGas": 2059851
+  },
+  "happyPath": {
+    "operations": [
+      {
+        "contract": "RecourseRegistry",
+        "function": "register",
+        "gas": 578185,
+        "key": "register",
+        "label": "register",
+        "reportStatistic": "median"
+      },
+      {
+        "contract": "BondVault",
+        "function": "postBond",
+        "gas": 142314,
+        "key": "postBond",
+        "label": "postBond",
+        "reportStatistic": "median"
+      },
+      {
+        "contract": "ClaimRegistry",
+        "function": "commitReceipts",
+        "gas": 208554,
+        "key": "commitReceipts",
+        "label": "commitReceipts",
+        "reportStatistic": "median"
+      },
+      {
+        "contract": "ClaimRegistry",
+        "function": "submitClaim",
+        "gas": 410603,
+        "key": "submitClaim",
+        "label": "submitClaim",
+        "reportStatistic": "median"
+      },
+      {
+        "contract": "OptimisticPath",
+        "function": "assertResidualLoss",
+        "gas": 412211,
+        "key": "assertResidualLoss",
+        "label": "assertResidualLoss",
+        "reportStatistic": "median"
+      },
+      {
+        "contract": "MockOptimisticOracleV3",
+        "function": "settle",
+        "gas": 102230,
+        "key": "settle",
+        "label": "settle (finalize + payout)",
+        "reportStatistic": "median"
+      }
+    ],
+    "test": "testFullOptimisticPathPaysClaimant",
+    "totalCallGas": 1854097
+  },
+  "isExternalTransactionReceiptGas": false,
+  "measurementKind": "foundry_gas_report_call_gas",
+  "notes": {
+    "giveRuling": "MockArbitrator.giveRuling includes ArbitrablePath.rule, the ClaimRegistry arbitration callback, and BondVault payout.",
+    "scope": "Median call gas reported by Foundry for one externally invoked operation in each isolated E2E test on Foundry's in-process EVM. Despite the legacy anvil-e2e directory name, no Anvil JSON-RPC transactions are submitted. These are not signed transaction receipts and exclude deployments, test-harness execution, token preparation, and view calls.",
+    "settle": "MockOptimisticOracleV3.settle includes the internal optimistic finalization callback and BondVault payout.",
+    "totalCallGas": "Sum of the listed call-gas rows; not whole-test gas."
+  },
+  "schemaVersion": 1
+}

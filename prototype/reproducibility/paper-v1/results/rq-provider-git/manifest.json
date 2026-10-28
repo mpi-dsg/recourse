@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "rq": "rq-provider-git",
+  "providerBacked": false,
+  "providerCompatibleSandbox": true,
+  "environment": "local-bare-git",
+  "workload": "git",
+  "artifacts": 3,
+  "cells": 20,
+  "blocked": [],
+  "fixture": {
+    "bareRepo": "/var/folders/0c/6q6jc1953_bf95lzg_vhvqh40000gn/T/recourse-git-fixture-100780943.git",
+    "mainShas": [
+      "25574f0a3c77714b25d02d24ad24af84a6f18faa",
+      "d0f28eb2520ac6d92f978e9cad44b50083505965",
+      "4aac69e5bf53f471e1f0c4d804156e8dda54c5bf",
+      "de43bf9838156b781845c70405432293b28bb8fc",
+      "3bf1d430e285286b4a2894ffedf4bdad4ab5294a",
+      "c661bfdd4d98157786bbfdb23cca56a3e8d1d8e7"
+    ],
+    "featureShas": [
+      "c5717f50395e64fc0eaff2c131cf11c8a27c0d90",
+      "777c8b52ef2d356e918557d8a706860f00b06a84",
+      "53cae326c356b4203d455be5f9a49b8d0c6b2700"
+    ],
+    "tagSha": "c661bfdd4d98157786bbfdb23cca56a3e8d1d8e7",
+    "setupMs": 1819,
+    "objectsBefore": 45,
+    "objectsAfter": 27
+  },
+  "env": {
+    "gitVersion": "git version 2.50.1 (Apple Git-155)",
+    "harnessCommit": "67212e27f82e4c4ec3e6528423d493bae3d55166",
+    "bunVersion": "1.3.5",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "bondMaxBytes": 100000,
+  "inputJsonHash": "sha256:1689d321a48cfd777f4bf31da262d0a688964e7a74c25c01b7c388563b4ef10c",
+  "receipts": [
+    {
+      "cellId": 0,
+      "effectReceiptHash": "0xba7d754663aa12437da3d4fde27adacb50380e5637d2407d50ab133722100b6c",
+      "recoveryOutcome": "success",
+      "recoveryReceiptVerified": true
+    },
+    {
+      "cellId": 1,
+      "effectReceiptHash": "0x976eb7f825012fcd618ef5e70fdc7924625b115bb4b18eef51104693bf0b9ba8",
+      "recoveryOutcome": "success",
+      "recoveryReceiptVerified": true
+    },
+    {
+      "cellId": 2,
+      "effectReceiptHash": "0x2fb370ae44aabd92dbf269a7ddd90cde3307057d3d44da051f7edce7b4b8a160",
+      "recoveryOutcome": "success",
+      "recoveryReceiptVerified": true
+    },
+    {
+      "cellId": 3,
+      "effectReceiptHash": "0x129f0792d0c54b28e3b785411e081713d2ea631c50b7f68fcf3068d21d88afcd",
+      "recoveryOutcome": "success",
+      "recoveryReceiptVerified": true
+    },
+    {
+      "cellId": 4,
+      "effectReceiptHash": "0xa61d9d27e2dbb50baca57b1b796918701382fd7cc83f20240fc4c15809d9ecde",
+      "recoveryOutcome": "success",
+      "recoveryReceiptVerified": true
+    },
+    {
+      "cellId": 5,
+      "effectReceiptHash": "0xdeafd10f51457bd72e0082c6e8e1874231bf92222449ee6ab7799b6a4a8f1ad6",
+      "recoveryOutcome": "success",
+      "recoveryReceiptVerified": true
+    },
+    {
+      "cellId": 6,
+      "effectReceiptHash": "0x39565e74e130bf274a1947256062fdbacef95e535c5b266b373f085b0199d280",
+      "recoveryOutcome": "success",
+      "recoveryReceiptVerified": true
+    },
+    {
+      "cellId": 7,
+      "effectReceiptHash": "0xd93def121c421926b7b64b051a44b7c13e12b9c26579cf72f7d820f5e85c9ab5",
+      "recoveryOutcome": "success",
+      "recoveryReceiptVerified": true
+    },
+    {
+      "cellId": 8,
+      "effectReceiptHash": "0x3b3a500a50acd539a7b673fc75d88250975ce692705d9ab22ab72285dfff1b45",
+      "recoveryOutcome": "failure",
+      "recoveryReceiptVerified": true
+    },
+    {
+      "cellId": 9,
+      "effectReceiptHash": "0xd7cd2927f8c1fc091cb87663c8a900e7eb0cd3ec1a95d2e198ca15e1c930e385",
+      "recoveryOutcome": "failure",
+      "recoveryReceiptVerified": true
+    },
+    {
+      "cellId": 10,
+      "effectReceiptHash": "0x63000e7e66581ed0bd88b1a0483c68e18b47c59e189d851c4e3e55a3053297a4",
+      "recoveryOutcome": "failure",
+      "recoveryReceiptVerified": true
+    },
+    {
+      "cellId": 11,
+      "effectReceiptHash": "0xf3aa327edf602704e5274fdeee0308cd2b651bdbaf5ce0085737ddaee5901842",
+      "recoveryOutcome": "failure",
+      "recoveryReceiptVerified": true
+    },
+    {
+      "cellId": 12,
+      "effectReceiptHash": "0x90656f5420edad728286c8a349fb9273503ca37cff96b7a10e2a309f7cc7ab2c",
+      "recoveryOutcome": "failure",
+      "recoveryReceiptVerified": true
+    },
+    {
+      "cellId": 13,
+      "effectReceiptHash": "0x77512640c09c615646e4fc131d56cbbf725af5b794daaf9e84d7f4773c93b69f",
+      "recoveryOutcome": "failure",
+      "recoveryReceiptVerified": true
+    },
+    {
+      "cellId": 14,
+      "effectReceiptHash": null,
+      "recoveryOutcome": null,
+      "recoveryReceiptVerified": null
+    },
+    {
+      "cellId": 15,
+      "effectReceiptHash": null,
+      "recoveryOutcome": null,
+      "recoveryReceiptVerified": null
+    },
+    {
+      "cellId": 16,
+      "effectReceiptHash": null,
+      "recoveryOutcome": null,
+      "recoveryReceiptVerified": null
+    },
+    {
+      "cellId": 17,
+      "effectReceiptHash": null,
+      "recoveryOutcome": null,
+      "recoveryReceiptVerified": null
+    },
+    {
+      "cellId": 18,
+      "effectReceiptHash": null,
+      "recoveryOutcome": null,
+      "recoveryReceiptVerified": null
+    },
+    {
+      "cellId": 19,
+      "effectReceiptHash": null,
+      "recoveryOutcome": null,
+      "recoveryReceiptVerified": null
+    }
+  ],
+  "tableEntry": {
+    "gross_harm_bytes": 3223,
+    "recovered_bytes": 1825,
+    "residual_bytes": 1398,
+    "tool_execution_latency_ms": 74.29369174999997
+  }
+}

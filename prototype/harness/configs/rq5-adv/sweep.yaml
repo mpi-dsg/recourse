@@ -1,0 +1,26 @@
+# RQ5-Adv -- Adversarial robustness sweep (main.tex IX.H "Threats").
+# Layers four adversary classes on top of the NONE fault baseline so each
+# row of table_rq5_adv isolates byzantine behaviour from predicate-routing
+# effects.  See harness/src/recourse_harness/adversaries.py for the
+# behaviour models and the worst-case-bound NOTEs.
+
+schemaVersion: 1
+rq: rq5-adv
+workloads:
+  - postgres
+seed: 137
+num_calls: 24
+failure_density: 0.6
+concurrency: 4
+approval_rate: 1.0
+repetitions: 5
+baselines:
+  - recourse
+fault_classes:
+  - NONE
+adversary_classes:
+  - NONE
+  - DISHONEST_CLAIMANT
+  - ABSENT_CHALLENGER
+  - BOND_STRESS
+  - COLLUDING_CHALLENGERS
